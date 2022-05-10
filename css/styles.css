@@ -4,9 +4,12 @@ body {
     font-family: 'Fira Sans', sans-serif;
     font-family: 'Noto Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 
-
+.debug_background {
+    background-color: red;
+}
 
 .green_text {
     color: hsl(166, 100%, 70%);
@@ -60,3 +63,17 @@ body {
 }
 
 /* Logos ------------------------------------------ */
+
+.logos {
+    width: 39vw;
+    height: 30vh;
+
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.logos img {
+    width: 31%;
+}
