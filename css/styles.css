@@ -1,0 +1,62 @@
+body {
+    background-color: hsl(216, 65%, 11%);
+    color: hsl(226, 70%, 88%);
+    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.green_text {
+    color: hsl(166, 100%, 70%);
+}
+
+.grey_text {
+    color: hsl(226, 70%, 88%);
+}
+
+/* Navigation --------------------------------------- */
+
+
+.navigation {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+.navigation div {
+    margin-left: 4%;
+    display: inline-block;
+}
+
+
+.navigation a {
+    text-decoration: none;
+}
+
+/* Title --------------------------------------- */
+
+.title {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 3rem;
+    text-align: center;
+
+    margin: auto;
+    margin-top: 3%;
+
+    width: 40%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.title p {
+    display: inline-block;
+}
+
+.title p::first-letter {
+    color: hsl(166, 100%, 70%);
+}
+
+/* Logos ------------------------------------------ */
