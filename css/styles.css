@@ -1,3 +1,4 @@
+/* General styles ----------------------------- */
 body {
     background-color: hsl(216, 65%, 11%);
     color: hsl(226, 70%, 88%);
@@ -20,7 +21,6 @@ body {
 }
 
 /* Navigation --------------------------------------- */
-
 
 .navigation {
     font-size: 2rem;
@@ -47,11 +47,14 @@ body {
 
     margin: auto;
     margin-top: 3%;
+    margin-bottom: 0px;
 
-    width: 40%;
+    max-width: 700px;
+    height: f;
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .title p {
@@ -65,10 +68,11 @@ body {
 /* Logos ------------------------------------------ */
 
 .logos {
-    width: 39vw;
-    height: 30vh;
+    max-width: 600px;
 
+    padding: 0;
     margin: auto;
+    margin-top: 0;
 
     display: flex;
     justify-content: space-between;
@@ -76,4 +80,24 @@ body {
 
 .logos img {
     width: 31%;
+    overflow: hidden;
+}
+
+#arrow{
+    width: 20%;
+}
+
+/* home text -------------------------------------------- */
+.home_text{
+    font-size: 2rem;
+    text-align: center;
+
+    margin: auto;
+    margin-top: 5%;
+    
+    width: 80%;
+}
+
+.home_text p{
+    margin: 0;
 }
