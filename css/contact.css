@@ -1,0 +1,39 @@
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 1%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 500px;
+    width: 25%;
+
+    background-color: #112240;
+    border-radius: 50px;
+    padding: 2%;
+}
+
+.socials img {
+    max-width: 300px;
+}
+
+.socials button {
+    font-size: 2rem;
+}
+
+.socials p {
+    margin: 0;
+    font-size: 1.5rem;
+    width: 100%;
+
+    text-align: center;
+}
+
+.socials p,
+.cv_card_text {
+    height: 2rem;
+}
