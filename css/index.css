@@ -2,7 +2,7 @@
 body {
     background-color: hsl(216, 65%, 11%);
     color: hsl(226, 70%, 88%);
-    
+
     font-family: 'Fira Sans', sans-serif;
     font-family: 'Noto Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
@@ -23,7 +23,7 @@ body {
     color: hsl(226, 70%, 88%);
 }
 
-.button_style{
+.button_style {
     color: hsl(166, 100%, 70%);
     text-align: center;
     font-size: 1rem;
@@ -32,7 +32,7 @@ body {
     border-color: hsl(166, 100%, 70%);
     border-width: 1px;
     border-radius: 5px;
-    
+
     background-color: transparent;
 }
 
@@ -58,7 +58,7 @@ body {
     margin-right: 10px;
 }
 
-.navigation a:hover{
+.navigation a:hover {
     margin-left: 0;
     margin-right: 0;
 }
@@ -110,34 +110,34 @@ body {
     overflow: hidden;
 }
 
-#arrow{
+#arrow {
     width: 20%;
 }
 
 /* home text -------------------------------------------- */
-.home_text{
+.home_text {
     font-size: 2rem;
     text-align: center;
 
     margin: auto;
-    margin-top: 5%;
-    
+    margin-top: 7%;
+
     width: 80%;
 }
 
-.home_text p{
+.home_text p {
     margin: 0;
 }
 
 /* home button(s) */
-.home_button{
-    
+.home_button {
+
     width: fit-content;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 8%;
 }
 
-.home_button button{
+.home_button button {
     font-size: 2rem;
     border-width: 2px;
     padding: 20px;
