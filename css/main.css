@@ -35,3 +35,30 @@ body {
 
     background-color: transparent;
 }
+
+/* Navigation --------------------------------------- */
+
+.navigation {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.navigation div {
+    margin-left: 4%;
+    display: inline-block;
+    width: 10ch;
+    text-align: center;
+}
+
+
+.navigation a {
+    width: fit-content;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navigation a:hover {
+    margin-left: 0;
+    margin-right: 0;
+}
