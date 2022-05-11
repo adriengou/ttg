@@ -70,7 +70,17 @@ body {
     font-size: 3rem;
     text-align: center;
 
+
     margin: auto;
+    margin-top: 3%;
+    margin-bottom: 0px;
+
     display: flex;
     align-items: center;
+
+    justify-content: space-between;
+}
+
+.title p::first-letter {
+    color: hsl(166, 100%, 70%);
 }

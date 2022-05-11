@@ -1,0 +1,30 @@
+/* Title ------------------------------------------*/
+
+.title {
+    max-width: 400px;
+}
+
+/* presentation ---------------------*/
+.presentation {
+    font-size: 1.9rem;
+}
+
+.presentation table {
+    margin: auto;
+    width: 90%;
+}
+
+.presentation tr {
+    text-align: center;
+}
+
+.presentation p {
+    max-width: 700px;
+    text-align: center;
+    margin: auto;
+}
+
+.presentation img {
+    max-width: 300px;
+    max-height: 300px;
+}
