@@ -44,12 +44,13 @@ body {
 .navigation {
     font-size: 1.5rem;
     margin-top: 20px;
+    display: flex;
+    width: 100%;
 }
 
 .navigation div {
-    margin-left: 4%;
-    display: inline-block;
-    width: 10ch;
+    width: 12ch;
+    max-width: 15ch;
     text-align: center;
 }
 
@@ -73,15 +74,22 @@ body {
     font-size: 3rem;
     text-align: center;
 
+    width: 100%;
 
     margin: auto;
-    margin-top: 3%;
-    margin-bottom: 0px;
+    margin-top: 5%;
+    margin-bottom: 5%;
 
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2%;
+}
+
+.title p {
+    margin: 0;
 }
 
 .title p::first-letter {
