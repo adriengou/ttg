@@ -43,7 +43,7 @@
     margin-top: 8%;
 }
 
-.home_button button {
+.home_button a {
     font-size: 2rem;
     border-width: 2px;
     padding: 20px;
