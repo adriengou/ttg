@@ -37,6 +37,8 @@ body {
     border-radius: 5px;
 
     background-color: transparent;
+
+    text-decoration: none;
 }
 
 /* Navigation --------------------------------------- */
