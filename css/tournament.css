@@ -1,0 +1,32 @@
+
+html, body{
+    overflow: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.navigation{
+    position: fixed;
+    margin: 0;
+    padding: 1.563% 0;
+    background-color: hsl(216, 65%, 11%);
+}
+
+.tournament_section{
+    margin: 0;
+    height: 100vh;
+    padding-top: 6%;
+    background-clip: content-box;
+}
+
+
+#settings{
+}
+
+#group{
+}
+
+#tree{
+}

@@ -1,4 +1,8 @@
 /* General styles ----------------------------- */
+html, body{
+    margin: 0;
+}
+
 html {
     font-size: max(1vw, 12px);
 }
