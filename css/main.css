@@ -1,6 +1,7 @@
 /* General styles ----------------------------- */
-html, body{
+html, body, main{
     margin: 0;
+    height: 100%;
 }
 
 html {
@@ -15,7 +16,7 @@ body {
     font-family: 'Noto Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
 
-    height: 100%;
+    
 }
 
 .debug_background {
@@ -46,11 +47,17 @@ body {
 }
 
 /* Navigation --------------------------------------- */
+header{
+    height: 6%;
+    
+}
+
 
 .navigation {
     font-size: 1.5rem;
-    margin-top: 20px;
+    height: 100%;
     display: flex;
+    align-items: center;
     width: 100%;
 }
 
