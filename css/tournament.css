@@ -1,6 +1,6 @@
 
 html, body{
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 html {
@@ -16,13 +16,47 @@ html {
 
 .tournament_section{
     margin: 0;
-    height: 100vh;
+    height: 71.9vh;
     padding-top: 6%;
     background-clip: content-box;
 }
 
 
 #settings{
+    background-clip: padding-box;
+    background-color: red;
+    padding: 10% 15%;
+    font-size: 2.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#settings .column{
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    gap: 7%;  
+}
+
+.last_column{
+    gap: 2% !important;
+}
+
+.last_column p{
+    margin: 0;
+}
+
+.last_column textarea{
+    height: 41%;
+}
+
+.first_column{
+    align-items: flex-end;
+}
+
+#settings input{
+    height: 2.3rem;
 }
 
 #group{
