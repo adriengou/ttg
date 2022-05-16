@@ -1,8 +1,4 @@
 /* General styles ----------------------------- */
-html, body, main{
-    margin: 0;
-    height: 100%;
-}
 
 html {
     font-size: max(1vw, 12px);
@@ -71,8 +67,8 @@ header{
 .navigation a {
     width: fit-content;
     text-decoration: none;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .navigation a:hover {
