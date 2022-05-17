@@ -1,0 +1,46 @@
+/* BRACKET ------------------------------------------------ */
+
+
+
+.bracket {
+    background-color: coral;
+    width: 100px;
+    height: 110px;
+
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+
+.match {
+    background-color: crimson;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.player {
+    background-color: green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.player p {
+    width: 95%;
+}
+
+.arrow {
+    background-color: brown;
+    width: 5px;
+}
+
+.bars {
+    background-color: blueviolet;
+    width: 10%;
+}

@@ -12,7 +12,8 @@ html,
 body,
 p,
 header,
-h1 {
+h1,
+h2 {
     margin: 0;
     padding: 0;
 }
@@ -64,6 +65,7 @@ a {
     color: #64FFDA;
     border-style: solid;
     border-width: 1px;
+    text-align: center;
 }
 
 
@@ -115,6 +117,6 @@ a {
     gap: 3%;
 }
 
-h1 p::first-letter {
+.title p::first-letter {
     color: #64FFDA;
 }
