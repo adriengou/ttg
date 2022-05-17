@@ -87,7 +87,7 @@ a {
 
 .navigation div {
     /* background-color: red; */
-    width: 8%;
+    width: 10ch;
 
     display: flex;
     flex-direction: row;
