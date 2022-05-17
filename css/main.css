@@ -103,7 +103,7 @@ a {
     font-weight: bolder;
 }
 
-h1 {
+.title {
     width: 100%;
 
     font-size: 3rem;

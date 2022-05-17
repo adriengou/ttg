@@ -14,57 +14,72 @@
     </head>
 
     <body class="font_color_1 background_color_1">
-        <header>
+        <header class="background_color_1">
             <nav class="navigation">
                 <div>
-                    <span class=" green_text open_bracket">[</span>
-                    <a class="grey_text" href="index.html">Home</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="index.html">Home</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
                 <div>
-                    <span class="green_text open_bracket">[</span>
-                    <a class="grey_text" href="about.html">About</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="about.html">About</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
                 <div>
-                    <span class="green_text open_bracket">[</span>
-                    <a class="grey_text" href="contact.html">Contact</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="contact.html">Contact</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
             </nav>
         </header>
         <main>
             <section class="tournament_section" id="settings">
-                <div class="column left_column">
-                    <div class="row">
-                        <label for="">Name:</label>
-                        <input type="text" name="" id="">
+                <h1 class="title">
+                    <p>Tournament</p>
+                    <p>Settings</p>
+                </h1>
+                <div class="form">
+                    <div class="column left_column">
+                        <div class="row">
+                            <label for="">Name:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="row">
+                            <label for="">Type:</label>
+                            <select name="" id="">
+                                <option value="">type 1</option>
+                                <option value="">type 2</option>
+                                <option value="">type 2</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label for="">Game / Sport:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="row">
+                            <label for="">Random distribution:</label>
+                            <input type="checkbox" name="" id="">
+                        </div>
+                        <div class="row">
+                            <label for="">Size:</label>
+                            <input type="number" name="" id="">
+                        </div>
                     </div>
-                    <div class="row">
-                        <label for="">Type:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Game / Sport:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Random distribution:</label>
-                        <input type="checkbox" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Size:</label>
-                        <input type="number" name="" id="">
+                    <div class="column right_column">
+                        <label for="">Participants:</label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
-                <div class="column right_column">
-                    <label for="">Participants:</label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                </div>
-
+                <a class="button_style" href="#group">GROUP</a>
             </section>
-            <section class="tournament_section" id="group"></section>
-            <section class="tournament_section" id="tree"></section>
+            <section class="tournament_section" id="group">
+                <a class="button_style" href="#settings">SETTINGS</a>
+                <a class="button_style" href="#tree">TREE</a>
+            </section>
+            <section class="tournament_section" id="tree">
+                <a class="button_style" href="#group">GROUP</a>
+            </section>
         </main>
     </body>
 

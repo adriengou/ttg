@@ -1,96 +1,83 @@
+html {}
 
-html, body{
+html,
+body {}
+
+
+
+main {
     overflow: hidden;
-}
-
-html {
     scroll-behavior: smooth;
-}
 
-.navigation{
-    position: fixed;
-    height: 6vh;
-    background-color: hsl(216, 65%, 11%);
-}
-
-.tournament_section{
-    margin: 0;
+    padding-top: 10vh;
     height: 100vh;
-    background-clip: content-box;
-    font-size: 2.3rem;
-}
 
-
-#settings{
-    height: 66vh;
-    padding: 10% 3%;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+}
+
+.tournament_section {
+    flex-shrink: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2%;
+}
+
+
+
+.tournament_section a {
+    display: block;
+    font-size: 1.5rem;
+    padding: 0.5% 2%;
+
+}
+
+.form {
+
+
+    width: 100%;
+    height: 80%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4%;
+}
+
+.form .column {
+    background-color: coral;
+
+    width: 45%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    font-size: 2rem;
+}
+
+.column input,
+.column textarea {
+    line-height: 2rem;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     gap: 5%;
 }
 
-#settings .column{
-    width: 47.5%;
-    display: flex;
-    flex-direction: column;
-}
 
-#settings .left_column{
-    justify-content: center;
-    gap: 5vh;
+.row input {
+    width: 10%;
+    font-size: 1.5rem;
 }
-
-#settings .right_column{
-    gap: 5vh;
-}
-
-#settings .row{
-    /* background-color: red; */
-    display: flex;
-    justify-content: start;
-    gap: 1vw;
-    align-items: baseline;
-}
-
-#settings input[type="text"],
-#settings input[type="number"],
-#settings textarea{
-    background-color: hsl(218, 58%, 16%);
-    border: none;
-    border-radius: 5px;
-    font-size: 2.3rem;
-    width: 20vw;
-    color: hsl(226, 70%, 88%);
-}
-
-#settings textarea{
-    height: 30.6vh;
-}
-
-#settings label{
-    width: 17ch;
-}
-
-.left_column label{
-    text-align: right;
-}
-
-#group{
-}
-
-#tree{
-}
-
-/* #settings{
-    background-clip: padding-box;
-    background-color: red;
-}
-#group{
-    background-clip: padding-box;
-    background-color: green;
-}
-#tree{
-    background-clip: padding-box;
-    background-color: blue;
-} */
