@@ -9,62 +9,161 @@
         <link rel="stylesheet" href="./css/tournament.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Sans&family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Sans&family=Roboto&display=swap"
+            rel="stylesheet">
         <title>Document</title>
     </head>
 
-    <body>
-        <header>
+    <body class="font_color_1 background_color_1">
+        <header class="background_color_1">
             <nav class="navigation">
                 <div>
-                    <span class=" green_text open_bracket">[</span>
-                    <a class="grey_text" href="index.html">Home</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="index.html">Home</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
                 <div>
-                    <span class="green_text open_bracket">[</span>
-                    <a class="grey_text" href="about.html">About</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="about.html">About</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
                 <div>
-                    <span class="green_text open_bracket">[</span>
-                    <a class="grey_text" href="contact.html">Contact</a>
-                    <span class="green_text close_bracket">]</span>
+                    <span class="font_color_2 open_bracket">[</span>
+                    <a class="font_color_1" href="contact.html">Contact</a>
+                    <span class="font_color_2 close_bracket">]</span>
                 </div>
             </nav>
         </header>
         <main>
             <section class="tournament_section" id="settings">
-                <div class="column left_column">
-                    <div class="row">
-                        <label for="">Name:</label>
-                        <input type="text" name="" id="">
+                <h2 class="title">
+                    <p>Tournament</p>
+                    <p>Settings</p>
+                </h2>
+                <div class="form">
+                    <div class="column left_column">
+                        <div class="row">
+                            <label for="">Name:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="row">
+                            <label for="">Type:</label>
+                            <select name="" id="">
+                                <option value="">type 1</option>
+                                <option value="">type 2</option>
+                                <option value="">type 3</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label for="">Game / Sport:</label>
+                            <input type="text" name="" id="">
+                        </div>
+                        <div class="row">
+                            <label for="">Random distribution:</label>
+                            <div>
+                                <input type="checkbox" name="" id="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="">Size:</label>
+                            <div>
+                                <input type="number" name="" id="">
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="row">
-                        <label for="">Type:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Game / Sport:</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Random distribution:</label>
-                        <input type="checkbox" name="" id="">
-                    </div>
-                    <div class="row">
-                        <label for="">Size:</label>
-                        <input type="number" name="" id="">
+                    <div class="column right_column">
+                        <label for="">Participants:</label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
-                <div class="column right_column">
-                    <label for="">Participants:</label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                <a class="button_style" href="#group">Next</a>
+            </section>
+            <section class="tournament_section" id="group">
+                <h2 class="title">
+                    <p>Organize</p>
+                    <p>Groups</p>
+                </h2>
+                <p id="description">Drag and drop contestants to swap their places</p>
+                <div id="card_group">
+                    <div class="card">
+                        <div class="card_title">
+                            <p>Group A</p>
+                            <div class="arrow">
+                                <div class="triangle small"></div>
+                                <div class="triangle big"></div>
+                            </div>
+                        </div>
+
+                        <div class="name_group">
+                            <p>Tarek</p>
+                            <p>Sarah</p>
+                            <p>Adrien</p>
+                            <p>Sirikone</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card_title">
+                            <p>Group B</p>
+                            <div class="arrow">
+                                <div class="triangle small"></div>
+                                <div class="triangle big"></div>
+                            </div>
+                        </div>
+
+                        <div class="name_group">
+                            <p>Mustapha</p>
+                            <p>Audrey</p>
+                            <p>Abdelkrim</p>
+                            <p>Jeffrey</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card_title">
+                            <p>Group C</p>
+                            <div class="arrow">
+                                <div class="triangle small"></div>
+                                <div class="triangle big"></div>
+                            </div>
+                        </div>
+
+                        <div class="name_group">
+                            <p>Nathan</p>
+                            <p>Fouad</p>
+                            <p>Imane</p>
+                            <p>Fatiha</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card_title">
+                            <p>Group D</p>
+                            <div class="arrow">
+                                <div class="triangle small"></div>
+                                <div class="triangle big"></div>
+                            </div>
+                        </div>
+
+                        <div class="name_group">
+                            <p>Stéphanie</p>
+                            <p>Enzo</p>
+                            <p>Matteo</p>
+                            <p>Nicolas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_wrapper">
+                    <a class="button_style" href="#settings" #settings">Back</a>
+                    <a class="button_style" href="#tree">Next</a>
                 </div>
 
             </section>
-            <section class="tournament_section" id="group"></section>
-            <section class="tournament_section" id="tree"></section>
+            <section class="tournament_section" id="tree">
+                <h2 class="title">
+                    <p>Tournament</p>
+                    <p>Tree</p>
+                </h2>
+                <a class="button_style" href="#group">Back</a>
+            </section>
         </main>
     </body>
 

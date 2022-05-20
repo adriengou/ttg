@@ -1,0 +1,107 @@
+.match {
+    height: 200px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.two_players {
+    /* largeur fixe et hauteur relative */
+    width: 200px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.player {
+    background-color: #333940;
+
+    width: 200px;
+    height: 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-radius: 5px;
+}
+
+.player p {
+    margin: 0;
+    margin-left: 10px;
+
+    height: 100%;
+    width: 70%;
+
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+
+    border-right: 1px solid #64FFDA;
+    padding-right: 10px;
+
+    color: #CCD6F6;
+}
+
+
+
+.arrow {
+    width: 19px;
+    height: 19px;
+}
+
+/* Inverted classes ---------------- */
+
+.arrow_right {
+    margin-right: 10px;
+    transform: rotate(180deg);
+}
+
+.arrow_left {
+    margin-left: 2px;
+}
+
+/* BARS ------------------------ */
+.bars {
+    width: 30px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.bar {
+    background-color: #333940;
+}
+
+.left_bars,
+.right_bar {
+    width: 50%;
+    height: 100%;
+}
+
+.right_bar {
+    background-color: #333940;
+    height: 10px;
+    margin: auto;
+}
+
+.left_bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.horizontal_bar {
+    width: 100%;
+    height: 10px;
+}
+
+.middle_bar {
+    width: 10px;
+    height: calc(100% - 40px);
+}
