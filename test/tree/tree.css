@@ -1,14 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  height: 100vh;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  justify-content: center;
   align-items: center;
 }
 
 .level {
+  height: 100%;
   width: fit-content;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.l0 {
+  gap: 20px;
+}
+
+.l0 {
+  gap: 20px;
+}
+
+.l0 {
+  gap: 20px;
+}
+
+.l0 {
   gap: 20px;
 }
 
@@ -21,7 +46,9 @@ body {
 
 p {
   margin: 0;
-  width: 400px;
-  height: 2ch;
+  min-width: 200px;
+  height: 3ch;
+  line-height: 3ch;
+  text-align: center;
   border: 1px solid black;
 }
