@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.level {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.match {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+p {
+  margin: 0;
+  width: 400px;
+  height: 2ch;
+  border: 1px solid black;
+}
