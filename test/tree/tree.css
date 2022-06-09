@@ -1,3 +1,7 @@
+:root {
+  --match-height: 60px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,10 +9,20 @@
 
 body {
   height: 100vh;
+  background-color: #0a192f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tree {
+  font-family: sans-serif;
+  /* background-color: coral; */
+
+  height: 70%;
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -17,31 +31,24 @@ body {
   width: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-}
-
-.l0 {
-  gap: 20px;
-}
-
-.l0 {
-  gap: 20px;
-}
-
-.l0 {
-  gap: 20px;
-}
-
-.l0 {
-  gap: 20px;
+  justify-content: space-around;
 }
 
 .match {
   width: fit-content;
+
+  height: 80px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-around;
+  /* gap: 5px; */
+}
+
+.l1 .match,
+.l2 .match,
+.l3 .match {
+  flex-grow: 1;
+  justify-content: space-around;
 }
 
 p {
@@ -50,5 +57,29 @@ p {
   height: 3ch;
   line-height: 3ch;
   text-align: center;
-  border: 1px solid black;
+
+  background-color: #333940;
+  border: 1px solid #7cfbdd;
+  border-radius: 5px;
+  color: #f0f3ff;
+}
+
+.bars > div {
+  width: 5px;
+  height: 50px;
+
+  background-color: coral;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bars > div::before,
+.bars > div::after {
+  content: "";
+  background-color: coral;
+  display: block;
+  width: 20px;
+  height: 5px;
+  transform: translateX(-20px);
 }
