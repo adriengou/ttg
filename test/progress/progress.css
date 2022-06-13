@@ -1,61 +1,275 @@
-:root {
-  --single-hor-bar-width: 1800px;
-  --single-hor-bar-height: 10px;
-  --single-hor-bar-ball-tran: calc(1800px - 15px);
-}
-
-.singlebar {
-  padding: 50px;
-  border: 5px solid black;
-}
-
-.singlebar .bar.horizontal {
-  width: var(--single-hor-bar-width);
-  height: var(--single-hor-bar-height);
-
-  background-color: lightgray;
-}
-
-.singlebar .bar.horizontal::before {
-  content: "";
-  display: block;
-
+html,
+body {
+  margin: 0;
   height: 100%;
-  background-color: coral;
-  width: 0%;
-
-  animation: horizontal_progress_bar 1s 1s linear forwards;
 }
 
-@keyframes horizontal_progress_bar {
-  20% {
-    width: 0%;
+.bar {
+  background-color: gray;
+  position: relative;
+}
+
+.bar::before {
+  display: block;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: coral;
+}
+
+.bar::after {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  content: "";
+  width: 25px;
+  height: 25px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  background-color: coral;
+  border-radius: 50%;
+}
+
+.bar.horizontal {
+  width: 200px;
+  height: 10px;
+}
+
+.bar.horizontal::before {
+  -webkit-animation: progress-bar 1s linear forwards;
+          animation: progress-bar 1s linear forwards;
+  width: 0;
+}
+
+.bar.horizontal::after {
+  top: calc(-25px / 3);
+  left: -12.5px;
+  -webkit-animation: progress-ball 1s linear forwards;
+          animation: progress-ball 1s linear forwards;
+}
+
+.bar.vertical {
+  width: 10px;
+  height: 200px;
+}
+
+.bar.vertical::before {
+  -webkit-animation: progress-bar-v 1s linear forwards;
+          animation: progress-bar-v 1s linear forwards;
+  height: 0;
+}
+
+.bar.vertical::after {
+  top: -12.5px;
+  left: calc(-25px / 3);
+  -webkit-animation: progress-ball-v 1s linear forwards;
+          animation: progress-ball-v 1s linear forwards;
+}
+
+body {
+  padding: 50px 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body .bracket {
+  height: 500px;
+  width: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .bracket .left,
+body .bracket .right {
+  height: 100%;
+}
+
+body .bracket .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body .bracket .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body .bracket .right .up,
+body .bracket .right .down {
+  height: calc(50% - (10px / 2));
+}
+
+body .bracket .right .up::before,
+body .bracket .right .down::before {
+  -webkit-animation: progress-bar-v 1s 0.99s linear forwards;
+          animation: progress-bar-v 1s 0.99s linear forwards;
+}
+
+body .bracket .right .up::after,
+body .bracket .right .down::after {
+  -webkit-animation: progress-ball-v 1s 0.99s linear forwards;
+          animation: progress-ball-v 1s 0.99s linear forwards;
+}
+
+body .bracket .right .middle::before {
+  -webkit-animation: progress-bar 1s 1.98s linear forwards;
+          animation: progress-bar 1s 1.98s linear forwards;
+}
+
+body .bracket .right .middle::after {
+  -webkit-animation: progress-ball 1s 1.98s linear forwards;
+          animation: progress-ball 1s 1.98s linear forwards;
+}
+
+body .bracket .right .down {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+@-webkit-keyframes progress-bar {
+  from {
+    width: 0;
   }
-  100% {
+  to {
     width: 100%;
   }
 }
 
-.singlebar .bar.horizontal::after {
-  content: "";
-  display: block;
-  position: absolute;
-
-  height: 30px;
-  width: 30px;
-
-  background-color: coral;
-  left: 0;
-  border-radius: 50%;
-
-  /* animation: horizontal_progress_ball 1s 1s linear forwards; */
+@keyframes progress-bar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
-@keyframes horizontal_progress_ball {
-  20% {
-    transform: translate(-50%, -66%) scale(1);
+@-webkit-keyframes progress-bar-v {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes progress-bar-v {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@-webkit-keyframes progress-ball {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(-25px / 3);
+  }
+  5% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(-25px / 3);
+  }
+  99% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(100% - 10px);
   }
   100% {
-    transform: translate(var(--single-hor-bar-ball-tran), -66%);
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    left: calc(100% - 10px);
   }
 }
+
+@keyframes progress-ball {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(-25px / 3);
+  }
+  5% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(-25px / 3);
+  }
+  99% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    left: calc(100% - 10px);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    left: calc(100% - 10px);
+  }
+}
+
+@-webkit-keyframes progress-ball-v {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(-25px / 3);
+  }
+  5% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(-25px / 3);
+  }
+  99% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(100% - 10px);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    top: calc(100% - 10px);
+  }
+}
+
+@keyframes progress-ball-v {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(-25px / 3);
+  }
+  5% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(-25px / 3);
+  }
+  99% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: calc(100% - 10px);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    top: calc(100% - 10px);
+  }
+}
+/*# sourceMappingURL=progress.css.map */
