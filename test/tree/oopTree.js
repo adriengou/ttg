@@ -55,6 +55,10 @@ function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
     index = o.index;
   }
 
+  function getData() {
+    return { player1, player2, winner, level, index };
+  }
+
   return {
     getPLayer1,
     getPLayer2,
@@ -67,8 +71,42 @@ function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
     getWinner,
     setWinner,
     setData,
+    getData,
   };
 }
+
+function testMatch() {
+  var match = createMatch("player_A", "player_B");
+
+  console.log(match.getPLayer1(), match.getPLayer2());
+  match.setPlayer1("new_player_A");
+  match.setPlayer2("new_player_B");
+  console.log(match.getPLayer1(), match.getPLayer2());
+
+  console.log(match.getIndex());
+  match.setIndex(3);
+  console.log(match.getIndex());
+
+  console.log(match.getLevel());
+  match.setLevel(4);
+  console.log(match.getLevel());
+
+  console.log(match.getWinner());
+  match.setWinner(2);
+  console.log(match.getWinner());
+
+  var data = JSON.stringify(match.getData());
+  console.log(data);
+
+  var match_2 = createMatch();
+  console.log(match_2.getData());
+  match_2.setData(JSON.parse(data));
+  console.log(match_2.getData());
+}
+
+// testMatch();
+
+//---------------------------------------------------------------------------
 
 function createLevel(index) {
   var matches = [];
@@ -105,11 +143,23 @@ function createLevel(index) {
     return matches[matchIndex].getWinner();
   }
 
-  function setData(o) {
-    matches = o.matches;
-    level = o.level;
+  function getData() {
+    data = {};
+    data.level = level;
+    data.matches = [];
 
-    for (matchData of o.matches) {
+    for (var match of matches) {
+      data.matches.push(match.getData());
+    }
+
+    return data;
+  }
+
+  function setData(o) {
+    level = o.level;
+    var newMatches = o.matches;
+
+    for (var matchData of newMatches) {
       var match = createMatch();
       match.setData(matchData);
       matches.push(match);
@@ -123,11 +173,28 @@ function createLevel(index) {
     addMatch,
     setWinner,
     getWinner,
+    getData,
     setData,
   };
 }
 
-function createTournament(list) {
+function testLevel() {
+  var level = createLevel(0);
+  level.addMatch("player_a", "player_b");
+  var data = JSON.stringify(level.getData());
+  console.log(data);
+  var new_level = createLevel(1);
+  console.log(new_level.getData());
+  console.log("json ", JSON.parse(data));
+  new_level.setData(JSON.parse(data));
+  console.log(new_level.getData());
+}
+
+//testLevel();
+
+//------------------------------------------------------------------------------
+
+function createTournament(list = []) {
   var playerList = list;
   var levels = [];
 
@@ -150,10 +217,85 @@ function createTournament(list) {
   //create [startMatchesNumber] matches with
   //random names from the player list
   for (var i = 0; i < startMatchesNumber; i++) {
-    var p1 = playerList[Match.floor(Math.random() * playerList.length)];
-    var p2 = playerList[Match.floor(Math.random() * playerList.length)];
+    var p1 = playerList[Math.floor(Math.random() * playerList.length)];
+    var p2 = playerList[Math.floor(Math.random() * playerList.length)];
 
-    firstLevel.createMatch(p1, p2);
-    levels.push(firstLevel);
+    firstLevel.addMatch(p1, p2);
   }
+
+  levels.push(firstLevel);
+
+  function getPlayerList() {
+    return playerList;
+  }
+
+  function setPlayerList(list) {
+    playerList = list;
+  }
+
+  function getLevels() {
+    return levels;
+  }
+
+  function getData() {
+    var data = {};
+    data.playerList = playerList;
+    data.levels = [];
+
+    for (l of levels) {
+      data.levels.push(l.getData());
+    }
+
+    return data;
+  }
+
+  function setData(data) {
+    levels = [];
+    playerList = data.playerList;
+    for (l of data.levels) {
+      var newLevel = createLevel();
+      newLevel.setData(l);
+      levels.push(newLevel);
+    }
+  }
+
+  return {
+    getPlayerList,
+    setPlayerList,
+    getLevels,
+    getData,
+    setData,
+  };
 }
+
+function testTournament() {
+  const playerList = [
+    "Adrien GOUACIDE",
+    "Nicolas DUCHÊNE",
+    "Stéphanie CHARY",
+    "Nathan TEISSIER",
+    "Matteo FRA",
+    "Imane QAJJOU",
+    "Enzo MARTINEZ",
+    "Sirikone KEOHAVONG",
+    "Fatiha ABDELLAOUI",
+    "Audrey CANNESSON",
+    "Abdelkrim KISSOUM",
+    "Sarah CASARIN",
+    "Tarek KOUSSAIER",
+    "Fouad MESBAH",
+    "Jeffrey VALENTIN",
+    "Manuel AGUET",
+  ];
+
+  var t = createTournament(playerList);
+  console.log(t);
+  var data = JSON.stringify(t.getData());
+  console.log(data);
+  var new_t = createTournament();
+  new_t.setData(JSON.parse(data));
+  console.log(JSON.stringify(new_t.getData()));
+}
+
+testTournament();
+//------------------------------------------------------------------------------
