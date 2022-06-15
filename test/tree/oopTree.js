@@ -126,7 +126,7 @@ function createLevel(index) {
 
   function addMatch(player1, player2) {
     if (matches.length) {
-      var matchIndex = matches.length - 1;
+      var matchIndex = matches.length;
     } else {
       var matchIndex = 0;
     }
@@ -216,14 +216,26 @@ function createTournament(list = []) {
 
   //create [startMatchesNumber] matches with
   //random names from the player list
+  let copiedList = [...playerList];
   for (var i = 0; i < startMatchesNumber; i++) {
-    var p1 = playerList[Math.floor(Math.random() * playerList.length)];
-    var p2 = playerList[Math.floor(Math.random() * playerList.length)];
+    let index1 = Math.floor(Math.random() * copiedList.length);
+    let p1 = copiedList[index1];
+    copiedList.splice(index1, 1);
+
+    let index2 = Math.floor(Math.random() * copiedList.length);
+    let p2 = copiedList[index2];
+    copiedList.splice(index2, 1);
 
     firstLevel.addMatch(p1, p2);
   }
 
   levels.push(firstLevel);
+
+  //create all the other levels
+  for (let levelIndex = 1; levelIndex < maxLevelsNumber; levelIndex++) {
+    let newLevel = createLevel(levelIndex);
+    levels.push(newLevel);
+  }
 
   function getPlayerList() {
     return playerList;
@@ -231,6 +243,11 @@ function createTournament(list = []) {
 
   function setPlayerList(list) {
     playerList = list;
+  }
+
+  function addLevel() {
+    var newLevel = createLevel(levels.length - 1);
+    levels.push(newLevel);
   }
 
   function getLevels() {
@@ -259,12 +276,49 @@ function createTournament(list = []) {
     }
   }
 
+  function getWinner(levelIndex, matchIndex) {
+    return levels[levelIndex].getWinner();
+  }
+
+  function setWinner(levelIndex, matchIndex, playerNumber) {
+    //set the winner in the match
+    if (!level[levelIndex].getWinner(matchIndex)) {
+      level[levelIndex].setWinner(matchIndex, playerNumber);
+    } else {
+      return false;
+    }
+
+    //--determine the index of the next match
+    //    euclidean division of the match index by 2
+    //      floored down division
+    let nextMatchIndex = Math.floor(matchIndex / 2);
+
+    //--move the winner to the next match
+    //    if the next match doesn't exist
+    //      create the next match of the next level
+    let nextMatch = createMatch("", "", levelIndex + 1, nextMatchIndex);
+    levels[levelIndex + 1][nextMatchIndex] = nextMatch;
+
+    //  if the match is at the top side of the next match
+    //    set the winner as the first player of the next match
+    //  if the match is at the bottom side of the next match
+    //    set the winner as the second player of the next match
+    if (matchIndex === nextMatchIndex * 2) {
+      setWinner(levelIndex + 1, nextMatchIndex, 1);
+    } else {
+      setWinner(levelIndex + 1, nextMatchIndex, 2);
+    }
+  }
+
   return {
     getPlayerList,
     setPlayerList,
+    addLevel,
     getLevels,
     getData,
     setData,
+    getWinner,
+    setWinner,
   };
 }
 
@@ -289,13 +343,13 @@ function testTournament() {
   ];
 
   var t = createTournament(playerList);
-  console.log(t);
-  var data = JSON.stringify(t.getData());
-  console.log(data);
-  var new_t = createTournament();
-  new_t.setData(JSON.parse(data));
-  console.log(JSON.stringify(new_t.getData()));
+  logObject(t);
 }
 
 testTournament();
 //------------------------------------------------------------------------------
+function logObject(o) {
+  let data = o.getData();
+  data = JSON.stringify(data, null, 4);
+  console.log(data);
+}
