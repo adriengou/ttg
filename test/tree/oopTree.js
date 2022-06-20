@@ -343,13 +343,59 @@ function testTournament() {
   ];
 
   var t = createTournament(playerList);
-  logObject(t);
+  logObject("Début du tournoi", t);
 }
 
-testTournament();
+//testTournament();
 //------------------------------------------------------------------------------
-function logObject(o) {
+function createDomManager(tournament, animationTime) {
+  let matchesDom = document.querySelector(".match");
+
+  function getPlayers(match) {
+    for (let matchDom of matchesDom) {
+      if (
+        matchDom.getAttribute("level") === levelIndex &&
+        matchDom.getAttribute("match") === matchIndex
+      ) {
+        return matchDom.querySelectorAll("p");
+      }
+    }
+  }
+
+  function triggerAnimation(previousMatchIndex, nextMatchIndex) {
+    let selector = `.bracket[match=${nextMatchIndex}] .middle,`;
+
+    if (nextMatchIndex * 2 === previousMatchIndex) {
+      selector += `.bracket[match=${nextMatchIndex}] .up`;
+    } else {
+      selector += `.bracket[match=${nextMatchIndex}] .down`;
+    }
+
+    let bars = document.querySelectorAll(selector);
+    for (let bar of bars) {
+      bar.classList.add("progress");
+    }
+  }
+
+  function updateMatch(previousMatch, nextMatch) {
+    let namesDom = getPlayers(match);
+
+    triggerAnimation(previousMatch.getIndex(), nextMatch.getIndex());
+
+    setTimeout(function () {
+      namesDom[0].textContent = nextMatch.getPlayer1();
+      namesDom[1].textContent = nextMatch.getPlayer2();
+    }, animationTime + 100);
+  }
+}
+//------------------------------------------------------------------------------
+
+function logObject(text, o) {
   let data = o.getData();
   data = JSON.stringify(data, null, 4);
+  console.log("-".repeat(100));
+  console.log(text);
   console.log(data);
+  console.log("-".repeat(100));
 }
+//------------------------------------------------------------------------------
