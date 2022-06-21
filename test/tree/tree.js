@@ -238,6 +238,8 @@ function test() {
 
 function testDom() {
   let tournament = createTournament(playerList);
+
+  generateDom(tournament);
   updateDom(tournament);
 
   window.addEventListener("click", (event) => {

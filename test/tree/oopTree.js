@@ -1,11 +1,11 @@
 function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
   var winner = "";
 
-  function getPLayer1() {
+  function getPlayer1() {
     return player1;
   }
 
-  function getPLayer2() {
+  function getPlayer2() {
     return player2;
   }
 
@@ -60,8 +60,8 @@ function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
   }
 
   return {
-    getPLayer1,
-    getPLayer2,
+    getPlayer1,
+    getPlayer2,
     setPlayer1,
     setPlayer2,
     getIndex,
@@ -78,10 +78,10 @@ function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
 function testMatch() {
   var match = createMatch("player_A", "player_B");
 
-  console.log(match.getPLayer1(), match.getPLayer2());
+  console.log(match.getPlayer1(), match.getPlayer2());
   match.setPlayer1("new_player_A");
   match.setPlayer2("new_player_B");
-  console.log(match.getPLayer1(), match.getPLayer2());
+  console.log(match.getPlayer1(), match.getPlayer2());
 
   console.log(match.getIndex());
   match.setIndex(3);
@@ -121,7 +121,7 @@ function createLevel(index) {
   }
 
   function getMatches() {
-    return match;
+    return matches;
   }
 
   function addMatch(player1, player2) {
@@ -232,8 +232,14 @@ function createTournament(list = []) {
   levels.push(firstLevel);
 
   //create all the other levels
+  let matchesNumber = startMatchesNumber / 2;
+
   for (let levelIndex = 1; levelIndex < maxLevelsNumber; levelIndex++) {
     let newLevel = createLevel(levelIndex);
+    for (var i = 0; i < matchesNumber; i++) {
+      newLevel.addMatch();
+    }
+    matchesNumber = matchesNumber / 2;
     levels.push(newLevel);
   }
 
@@ -349,7 +355,57 @@ function testTournament() {
 //testTournament();
 //------------------------------------------------------------------------------
 function createDomManager(tournament, animationTime) {
-  let matchesDom = document.querySelector(".match");
+  //Initialization
+  //Creation of the element in the Dom
+  //levels and brackets
+  let temp = document.querySelectorAll("template");
+
+  let matchesDom = [];
+  let bracketsDom = [];
+
+  let tournamentDom = document.querySelector(".tournament");
+
+  for (let level of tournament.getLevels()) {
+    let levelDom = document.createElement("div");
+    levelDom.classList.add("level");
+
+    let bracketListDom = document.createElement("div");
+    bracketListDom.classList.add("bracketList");
+
+    for (let match of level.getMatches()) {
+      let matchDom = document.createElement("div");
+      matchDom.classList.add("match");
+
+      console.log(match.getData());
+      console.log(match.getPlayer1);
+
+      matchDom.setAttribute("level", level.getLevel());
+      matchDom.setAttribute("match", match.getLevel());
+
+      let player1Dom = document.createElement("p");
+      player1Dom.classList.add("player");
+      player1Dom.textContent = match.getPlayer1();
+
+      let player2Dom = document.createElement("p");
+      player2Dom.classList.add("player");
+      player2Dom.textContent = match.getPlayer2();
+
+      matchDom.appendChild(player1Dom);
+      matchDom.appendChild(player2Dom);
+
+      levelDom.appendChild(matchDom);
+
+      let bracketDom = temp[0].content.cloneNode(true);
+      bracketListDom.appendChild(bracketDom);
+    }
+
+    tournamentDom.appendChild(levelDom);
+    tournamentDom.appendChild(bracketListDom);
+  }
+
+  let winnerDom = document.createElement("p");
+  winnerDom.classList.add("player", "winner");
+  tournamentDom.appendChild(winnerDom);
 
   function getPlayers(match) {
     for (let matchDom of matchesDom) {
@@ -377,7 +433,7 @@ function createDomManager(tournament, animationTime) {
     }
   }
 
-  function updateMatch(previousMatch, nextMatch) {
+  function setWinner(previousMatch, nextMatch) {
     let namesDom = getPlayers(match);
 
     triggerAnimation(previousMatch.getIndex(), nextMatch.getIndex());
@@ -388,6 +444,33 @@ function createDomManager(tournament, animationTime) {
     }, animationTime + 100);
   }
 }
+
+function testDomManager() {
+  const playerList = [
+    "Adrien GOUACIDE",
+    "Nicolas DUCHÊNE",
+    "Stéphanie CHARY",
+    "Nathan TEISSIER",
+    "Matteo FRA",
+    "Imane QAJJOU",
+    "Enzo MARTINEZ",
+    "Sirikone KEOHAVONG",
+    "Fatiha ABDELLAOUI",
+    "Audrey CANNESSON",
+    "Abdelkrim KISSOUM",
+    "Sarah CASARIN",
+    "Tarek KOUSSAIER",
+    "Fouad MESBAH",
+    "Jeffrey VALENTIN",
+    "Manuel AGUET",
+  ];
+
+  let tournament = createTournament(playerList);
+  logObject("tournament data: \n", tournament);
+  let domManager = createDomManager(tournament, 0.4);
+}
+
+testDomManager();
 //------------------------------------------------------------------------------
 
 function logObject(text, o) {

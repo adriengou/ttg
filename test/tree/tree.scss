@@ -1,0 +1,114 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+.tournament {
+  height: 60%;
+  display: flex;
+  justify-content: space-evenly;
+
+  .level,
+  .bracketList {
+    // flex: 1 1 11%;
+  }
+
+  .level {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+
+    .match {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 10px;
+      flex-grow: 1;
+      background-color: coral;
+    }
+  }
+
+  .player {
+    margin: 0;
+    min-width: 20ch;
+    border: 1px solid black;
+
+    height: 3ch;
+    line-height: 3ch;
+
+    &.winner {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .bracketList {
+  }
+}
+
+@keyframes progress-bar {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes progress-bar-v {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes progress-ball {
+  0% {
+    transform: scale(1);
+    left: calc(-25px / 3);
+  }
+
+  5% {
+    transform: scale(1);
+    left: calc(-25px / 3);
+  }
+
+  99% {
+    transform: scale(1);
+    left: calc(100% - 10px);
+  }
+
+  100% {
+    transform: scale(0);
+    left: calc(100% - 10px);
+  }
+}
+
+@keyframes progress-ball-v {
+  0% {
+    transform: scale(1);
+    top: calc(-25px / 3);
+  }
+
+  5% {
+    transform: scale(1);
+    top: calc(-25px / 3);
+  }
+
+  99% {
+    transform: scale(1);
+    top: calc(100% - 10px);
+  }
+
+  100% {
+    transform: scale(0);
+    top: calc(100% - 10px);
+  }
+}

@@ -4,145 +4,202 @@ body {
   height: 100%;
 }
 
-.bar {
+body {
+  padding: 50px 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.bracket {
+  height: 500px;
+  width: 500px;
+  display: flex;
+}
+.bracket .bar {
   background-color: gray;
   position: relative;
 }
-
-.bar::before {
+.bracket .bar::before {
   display: block;
   content: "";
   height: 100%;
   width: 100%;
   background-color: coral;
 }
-
-.bar::after {
+.bracket .bar::after {
   position: absolute;
   z-index: 10;
   display: block;
   content: "";
   width: 25px;
   height: 25px;
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   background-color: coral;
   border-radius: 50%;
 }
-
-.bar.horizontal {
-  width: 200px;
+.bracket .bar.horizontal {
+  width: 100%;
   height: 10px;
 }
-
-.bar.horizontal::before {
+.bracket .bar.horizontal::before {
   -webkit-animation: progress-bar 1s linear forwards;
           animation: progress-bar 1s linear forwards;
   width: 0;
 }
-
-.bar.horizontal::after {
-  top: calc(-25px / 3);
+.bracket .bar.horizontal::after {
+  top: -8.3333333333px;
   left: -12.5px;
   -webkit-animation: progress-ball 1s linear forwards;
           animation: progress-ball 1s linear forwards;
 }
-
-.bar.vertical {
+.bracket .bar.vertical {
   width: 10px;
-  height: 200px;
 }
-
-.bar.vertical::before {
+.bracket .bar.vertical::before {
   -webkit-animation: progress-bar-v 1s linear forwards;
           animation: progress-bar-v 1s linear forwards;
   height: 0;
 }
-
-.bar.vertical::after {
+.bracket .bar.vertical::after {
   top: -12.5px;
-  left: calc(-25px / 3);
+  left: -8.3333333333px;
   -webkit-animation: progress-ball-v 1s linear forwards;
           animation: progress-ball-v 1s linear forwards;
 }
-
-body {
-  padding: 50px 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-body .bracket {
-  height: 500px;
-  width: 500px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-body .bracket .left,
-body .bracket .right {
+.bracket .left,
+.bracket .right {
   height: 100%;
+  width: 100%;
 }
-
-body .bracket .left {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.bracket .left {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
-body .bracket .right {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.bracket .right {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
-body .bracket .right .up,
-body .bracket .right .down {
-  height: calc(50% - (10px / 2));
+.bracket .right .up,
+.bracket .right .down {
+  height: calc(50% - 5px);
 }
-
-body .bracket .right .up::before,
-body .bracket .right .down::before {
+.bracket .right .up::before,
+.bracket .right .down::before {
   -webkit-animation: progress-bar-v 1s 0.99s linear forwards;
           animation: progress-bar-v 1s 0.99s linear forwards;
 }
-
-body .bracket .right .up::after,
-body .bracket .right .down::after {
+.bracket .right .up::after,
+.bracket .right .down::after {
   -webkit-animation: progress-ball-v 1s 0.99s linear forwards;
           animation: progress-ball-v 1s 0.99s linear forwards;
 }
-
-body .bracket .right .middle::before {
+.bracket .right .middle::before {
   -webkit-animation: progress-bar 1s 1.98s linear forwards;
           animation: progress-bar 1s 1.98s linear forwards;
 }
-
-body .bracket .right .middle::after {
+.bracket .right .middle::after {
   -webkit-animation: progress-ball 1s 1.98s linear forwards;
           animation: progress-ball 1s 1.98s linear forwards;
 }
+.bracket .right .down {
+  transform: rotate(180deg);
+}
 
-body .bracket .right .down {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+.bracket {
+  height: 500px;
+  width: 500px;
+  display: flex;
+}
+.bracket .bar {
+  background-color: gray;
+  position: relative;
+}
+.bracket .bar::before {
+  display: block;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: coral;
+}
+.bracket .bar::after {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  content: "";
+  width: 25px;
+  height: 25px;
+  transform: scale(0);
+  background-color: coral;
+  border-radius: 50%;
+}
+.bracket .bar.horizontal {
+  width: 100%;
+  height: 10px;
+}
+.bracket .bar.horizontal::before {
+  -webkit-animation: progress-bar 1s linear forwards;
+          animation: progress-bar 1s linear forwards;
+  width: 0;
+}
+.bracket .bar.horizontal::after {
+  top: -8.3333333333px;
+  left: -12.5px;
+  -webkit-animation: progress-ball 1s linear forwards;
+          animation: progress-ball 1s linear forwards;
+}
+.bracket .bar.vertical {
+  width: 10px;
+}
+.bracket .bar.vertical::before {
+  -webkit-animation: progress-bar-v 1s linear forwards;
+          animation: progress-bar-v 1s linear forwards;
+  height: 0;
+}
+.bracket .bar.vertical::after {
+  top: -12.5px;
+  left: -8.3333333333px;
+  -webkit-animation: progress-ball-v 1s linear forwards;
+          animation: progress-ball-v 1s linear forwards;
+}
+.bracket .left,
+.bracket .right {
+  height: 100%;
+  width: 100%;
+}
+.bracket .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bracket .right {
+  display: flex;
+  flex-direction: column;
+}
+.bracket .right .up,
+.bracket .right .down {
+  height: calc(50% - 5px);
+}
+.bracket .right .up::before,
+.bracket .right .down::before {
+  -webkit-animation: progress-bar-v 1s 0.99s linear forwards;
+          animation: progress-bar-v 1s 0.99s linear forwards;
+}
+.bracket .right .up::after,
+.bracket .right .down::after {
+  -webkit-animation: progress-ball-v 1s 0.99s linear forwards;
+          animation: progress-ball-v 1s 0.99s linear forwards;
+}
+.bracket .right .middle::before {
+  -webkit-animation: progress-bar 1s 1.98s linear forwards;
+          animation: progress-bar 1s 1.98s linear forwards;
+}
+.bracket .right .middle::after {
+  -webkit-animation: progress-ball 1s 1.98s linear forwards;
+          animation: progress-ball 1s 1.98s linear forwards;
+}
+.bracket .right .down {
+  transform: rotate(180deg);
 }
 
 @-webkit-keyframes progress-bar {
@@ -162,7 +219,6 @@ body .bracket .right .down {
     width: 100%;
   }
 }
-
 @-webkit-keyframes progress-bar-v {
   from {
     height: 0;
@@ -171,7 +227,6 @@ body .bracket .right .down {
     height: 100%;
   }
 }
-
 @keyframes progress-bar-v {
   from {
     height: 0;
@@ -180,96 +235,75 @@ body .bracket .right .down {
     height: 100%;
   }
 }
-
 @-webkit-keyframes progress-ball {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(1);
+    left: -8.3333333333px;
   }
   5% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(1);
+    left: -8.3333333333px;
   }
   99% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     left: calc(100% - 10px);
   }
   100% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     left: calc(100% - 10px);
   }
 }
-
 @keyframes progress-ball {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(1);
+    left: -8.3333333333px;
   }
   5% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(1);
+    left: -8.3333333333px;
   }
   99% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     left: calc(100% - 10px);
   }
   100% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     left: calc(100% - 10px);
   }
 }
-
 @-webkit-keyframes progress-ball-v {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(1);
+    top: -8.3333333333px;
   }
   5% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(1);
+    top: -8.3333333333px;
   }
   99% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     top: calc(100% - 10px);
   }
   100% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     top: calc(100% - 10px);
   }
 }
-
 @keyframes progress-ball-v {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(1);
+    top: -8.3333333333px;
   }
   5% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(1);
+    top: -8.3333333333px;
   }
   99% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     top: calc(100% - 10px);
   }
   100% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     top: calc(100% - 10px);
   }
-}
-/*# sourceMappingURL=progress.css.map */
+}/*# sourceMappingURL=progress.css.map */
