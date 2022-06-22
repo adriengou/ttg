@@ -43,6 +43,8 @@ function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
     } else if (playerNumber === 2) {
       winner = player2;
     }
+
+    return winner;
   }
 
   function setData(o) {
@@ -137,7 +139,116 @@ function testMatch() {
 
 
 */
-function createTournament(list = []) {}
+function createTournament(list = []) {
+  //Variables
+  //an array for all the levels
+  levels = [];
+
+  //Number of players
+  let numberOfPlayers = list.length;
+
+  //Initialization
+  //Generate the first level with matches with random players
+  let firstLevel = [];
+  let listClone = [...list];
+
+  for (let i = 0; i < numberOfPlayers / 2; i++) {
+    let randomIndex1 = Math.floor(Math.random() * listClone.length);
+    let randomName1 = listClone[randomIndex1];
+    listClone.splice(randomIndex1, 1);
+
+    let randomIndex2 = Math.floor(Math.random() * listClone.length);
+    let randomName2 = listClone[randomIndex2];
+    listClone.splice(randomIndex1, 1);
+
+    let match = createMatch(randomName1, randomName2, 0, i);
+    firstLevel.push(match);
+  }
+
+  levels.push(firstLevel);
+
+  // How many levels there is
+  let numberOfLevels = 1;
+
+  let n = levels[0].length; //The number of matches in the first level
+
+  while (n > 1) {
+    n = n / 2;
+    numberOfLevels++;
+  }
+
+  // Generate all the other levels with empty matches
+  n = levels[0].length / 2;
+
+  for (let i = 1; i < numberOfLevels; i++) {
+    levels.push([]);
+    for (let j = 0; j < n; j++) {
+      levels[i].push(createMatch("", "", i, j));
+    }
+    n = n / 2;
+  }
+
+  //Methods
+  function getData() {
+    let data = {};
+    data.playerList = list;
+    data.levels = [];
+
+    for (let level of levels) {
+      let dataLevel = [];
+      for (let match of level) {
+        dataLevel.push(match.getData());
+      }
+      data.levels.push(dataLevel);
+    }
+    return data;
+  }
+
+  function getPlayer1(levelIndex, matchIndex) {
+    return levels[levelIndex][matchIndex].getPlayer1();
+  }
+
+  function getPlayer2(levelIndex, matchIndex) {
+    return levels[levelIndex][matchIndex].getPlayer2();
+  }
+
+  function setPlayer1(levelIndex, matchIndex, player) {
+    levels[levelIndex][matchIndex].setPlayer1(player);
+  }
+
+  function setPlayer2(levelIndex, matchIndex, player) {
+    levels[levelIndex][matchIndex].setPlayer2(player);
+  }
+
+  function getWinner(levelIndex, matchIndex) {
+    return levels[levelIndex][matchIndex].getWinner();
+  }
+
+  function setWinner(levelIndex, matchIndex, playerNumber) {
+    //Set winner in the match and set him as a player in the next
+    let winner = levels[levelIndex][matchIndex].setWinner(playerNumber);
+
+    let nextLevelIndex = levelIndex + 1;
+    let nextMatchIndex = Math.floor(matchIndex / 2);
+
+    if (matchIndex % 2 === 0) {
+      setPlayer1(nextLevelIndex, nextMatchIndex, winner);
+    } else {
+      setPlayer2(nextLevelIndex, nextMatchIndex, winner);
+    }
+  }
+
+  //Object Returns
+  return {
+    getData,
+    getPlayer1,
+    getPlayer2,
+    setPlayer1,
+    setPlayer2,
+    getWinner,
+    setWinner,
+  };
+}
 
 function testTournament() {
   const playerList = [
@@ -163,7 +274,7 @@ function testTournament() {
   logObject("Début du tournoi", t);
 }
 
-//testTournament();
+testTournament();
 /*
 
 
@@ -223,7 +334,7 @@ function testDomManager() {
   let domManager = createDomManager(tournament, 0.4);
 }
 
-testDomManager();
+// testDomManager();
 //------------------------------------------------------------------------------
 
 function logObject(text, o) {
