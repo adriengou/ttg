@@ -11,224 +11,128 @@ body {
 }
 
 .bracket {
-  height: 500px;
-  width: 500px;
+  width: 100px;
+  height: 400px;
+  background-color: royalblue;
+}
 
+$ballSize: 25px;
+$barWidth: 10px;
+$barColor: gray;
+$progressBarColor: coral;
+$progressBallColor: coral;
+$animationDuration: 0.4s;
+$animationDelay: calc($animationDuration - 0.05s);
+
+.bracket {
   display: flex;
+  margin: 0;
 
   .bar {
-    background-color: gray;
+    margin: 0;
+    background-color: $barColor;
     position: relative;
 
     &::before {
-      display: block;
       content: "";
-
-      height: 100%;
-      width: 100%;
-      background-color: coral;
-    }
-
-    &::after {
+      display: block;
       position: absolute;
-      z-index: 10;
-      display: block;
+      background-color: $progressBarColor;
+    }
+
+    &::after {
       content: "";
+      display: block;
+      position: absolute;
 
-      width: 25px;
-      height: 25px;
-      transform: scale(0);
+      width: $ballSize;
+      height: $ballSize;
+      background-color: $progressBallColor;
 
-      background-color: coral;
       border-radius: 50%;
-    }
-  }
-
-  .bar.horizontal {
-    width: 100%;
-    height: 10px;
-
-    &::before {
-      animation: progress-bar 1s linear forwards;
-      width: 0;
+      transform: scale(0);
     }
 
-    &::after {
-      top: calc(-25px / 3);
-      left: -12.5px;
+    &.horizontal {
+      height: $barWidth;
 
-      animation: progress-ball 1s linear forwards;
-    }
-  }
+      &::before {
+        width: 0%;
+        height: $barWidth;
+      }
 
-  .bar.vertical {
-    width: 10px;
-
-    &::before {
-      animation: progress-bar-v 1s linear forwards;
-      height: 0;
+      &::after {
+        top: calc(0px - ($ballSize / 3));
+        left: calc(0px - ($ballSize / 3));
+      }
     }
 
-    &::after {
-      top: -12.5px;
-      left: calc(-25px / 3);
+    &.vertical {
+      width: $barWidth;
 
-      animation: progress-ball-v 1s linear forwards;
+      &::before {
+        width: $barWidth;
+        height: 0%;
+      }
+
+      &::after {
+        top: calc(0px - ($ballSize / 3));
+        left: calc(0px - ($ballSize / 3));
+      }
     }
   }
 
   .left,
   .right {
-    height: 100%;
-    width: 100%;
-  }
+    flex-grow: 1;
 
-  .left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   .right {
-    display: flex;
-    flex-direction: column;
+    .bar {
+      flex-grow: 1;
+    }
 
-    .up,
-    .down {
-      height: calc(50% - (10px / 2));
+    .vertical {
+      height: 50%;
 
-      &::before {
-        animation: progress-bar-v 1s 0.99s linear forwards;
+      &.down {
+        transform: rotate(180deg);
       }
-
+      &::before,
       &::after {
-        animation: progress-ball-v 1s 0.99s linear forwards;
+        animation-delay: $animationDelay;
       }
     }
 
-    .middle {
-      &::before {
-        animation: progress-bar 1s 1.98s linear forwards;
-      }
-
+    .horizontal {
+      &::before,
       &::after {
-        animation: progress-ball 1s 1.98s linear forwards;
+        animation-delay: calc($animationDelay * 2);
       }
-    }
-
-    .down {
-      transform: rotate(180deg);
     }
   }
 }
-.bracket {
-  height: 500px;
-  width: 500px;
 
-  display: flex;
-
-  .bar {
-    background-color: gray;
-    position: relative;
-
+.anim {
+  &.horizontal {
     &::before {
-      display: block;
-      content: "";
-
-      height: 100%;
-      width: 100%;
-      background-color: coral;
+      animation: progress-bar $animationDuration linear forwards;
     }
-
     &::after {
-      position: absolute;
-      z-index: 10;
-      display: block;
-      content: "";
-
-      width: 25px;
-      height: 25px;
-      transform: scale(0);
-
-      background-color: coral;
-      border-radius: 50%;
+      animation: progress-ball $animationDuration linear forwards;
     }
   }
 
-  .bar.horizontal {
-    width: 100%;
-    height: 10px;
-
+  &.vertical {
     &::before {
-      animation: progress-bar 1s linear forwards;
-      width: 0;
+      animation: progress-bar-v $animationDuration linear forwards;
     }
-
     &::after {
-      top: calc(-25px / 3);
-      left: -12.5px;
-
-      animation: progress-ball 1s linear forwards;
-    }
-  }
-
-  .bar.vertical {
-    width: 10px;
-
-    &::before {
-      animation: progress-bar-v 1s linear forwards;
-      height: 0;
-    }
-
-    &::after {
-      top: -12.5px;
-      left: calc(-25px / 3);
-
-      animation: progress-ball-v 1s linear forwards;
-    }
-  }
-
-  .left,
-  .right {
-    height: 100%;
-    width: 100%;
-  }
-
-  .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .right {
-    display: flex;
-    flex-direction: column;
-
-    .up,
-    .down {
-      height: calc(50% - (10px / 2));
-
-      &::before {
-        animation: progress-bar-v 1s 0.99s linear forwards;
-      }
-
-      &::after {
-        animation: progress-ball-v 1s 0.99s linear forwards;
-      }
-    }
-
-    .middle {
-      &::before {
-        animation: progress-bar 1s 1.98s linear forwards;
-      }
-
-      &::after {
-        animation: progress-ball 1s 1.98s linear forwards;
-      }
-    }
-
-    .down {
-      transform: rotate(180deg);
+      animation: progress-ball-v $animationDuration linear forwards;
     }
   }
 }
@@ -255,44 +159,44 @@ body {
 
 @keyframes progress-ball {
   0% {
-    transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(0);
+    left: calc(0px - $ballSize / 3);
   }
 
   5% {
     transform: scale(1);
-    left: calc(-25px / 3);
+    left: calc(0px - $ballSize / 3);
   }
 
   99% {
     transform: scale(1);
-    left: calc(100% - 10px);
+    left: calc(100% - $barWidth);
   }
 
   100% {
     transform: scale(0);
-    left: calc(100% - 10px);
+    left: calc(100% - $barWidth);
   }
 }
 
 @keyframes progress-ball-v {
   0% {
-    transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(0);
+    top: calc(0px - $ballSize / 3);
   }
 
   5% {
     transform: scale(1);
-    top: calc(-25px / 3);
+    top: calc(0px - $ballSize / 3);
   }
 
   99% {
     transform: scale(1);
-    top: calc(100% - 10px);
+    top: calc(100% - $barWidth);
   }
 
   100% {
     transform: scale(0);
-    top: calc(100% - 10px);
+    top: calc(100% - $barWidth);
   }
 }

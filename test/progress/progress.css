@@ -11,195 +11,98 @@ body {
 }
 
 .bracket {
-  height: 500px;
-  width: 500px;
-  display: flex;
-}
-.bracket .bar {
-  background-color: gray;
-  position: relative;
-}
-.bracket .bar::before {
-  display: block;
-  content: "";
-  height: 100%;
-  width: 100%;
-  background-color: coral;
-}
-.bracket .bar::after {
-  position: absolute;
-  z-index: 10;
-  display: block;
-  content: "";
-  width: 25px;
-  height: 25px;
-  transform: scale(0);
-  background-color: coral;
-  border-radius: 50%;
-}
-.bracket .bar.horizontal {
-  width: 100%;
-  height: 10px;
-}
-.bracket .bar.horizontal::before {
-  -webkit-animation: progress-bar 1s linear forwards;
-          animation: progress-bar 1s linear forwards;
-  width: 0;
-}
-.bracket .bar.horizontal::after {
-  top: -8.3333333333px;
-  left: -12.5px;
-  -webkit-animation: progress-ball 1s linear forwards;
-          animation: progress-ball 1s linear forwards;
-}
-.bracket .bar.vertical {
-  width: 10px;
-}
-.bracket .bar.vertical::before {
-  -webkit-animation: progress-bar-v 1s linear forwards;
-          animation: progress-bar-v 1s linear forwards;
-  height: 0;
-}
-.bracket .bar.vertical::after {
-  top: -12.5px;
-  left: -8.3333333333px;
-  -webkit-animation: progress-ball-v 1s linear forwards;
-          animation: progress-ball-v 1s linear forwards;
-}
-.bracket .left,
-.bracket .right {
-  height: 100%;
-  width: 100%;
-}
-.bracket .left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.bracket .right {
-  display: flex;
-  flex-direction: column;
-}
-.bracket .right .up,
-.bracket .right .down {
-  height: calc(50% - 5px);
-}
-.bracket .right .up::before,
-.bracket .right .down::before {
-  -webkit-animation: progress-bar-v 1s 0.99s linear forwards;
-          animation: progress-bar-v 1s 0.99s linear forwards;
-}
-.bracket .right .up::after,
-.bracket .right .down::after {
-  -webkit-animation: progress-ball-v 1s 0.99s linear forwards;
-          animation: progress-ball-v 1s 0.99s linear forwards;
-}
-.bracket .right .middle::before {
-  -webkit-animation: progress-bar 1s 1.98s linear forwards;
-          animation: progress-bar 1s 1.98s linear forwards;
-}
-.bracket .right .middle::after {
-  -webkit-animation: progress-ball 1s 1.98s linear forwards;
-          animation: progress-ball 1s 1.98s linear forwards;
-}
-.bracket .right .down {
-  transform: rotate(180deg);
+  width: 100px;
+  height: 400px;
+  background-color: royalblue;
 }
 
 .bracket {
-  height: 500px;
-  width: 500px;
   display: flex;
+  margin: 0;
 }
 .bracket .bar {
+  margin: 0;
   background-color: gray;
   position: relative;
 }
 .bracket .bar::before {
-  display: block;
   content: "";
-  height: 100%;
-  width: 100%;
+  display: block;
+  position: absolute;
   background-color: coral;
 }
 .bracket .bar::after {
-  position: absolute;
-  z-index: 10;
-  display: block;
   content: "";
+  display: block;
+  position: absolute;
   width: 25px;
   height: 25px;
-  transform: scale(0);
   background-color: coral;
   border-radius: 50%;
+  transform: scale(0);
 }
 .bracket .bar.horizontal {
-  width: 100%;
   height: 10px;
 }
 .bracket .bar.horizontal::before {
-  -webkit-animation: progress-bar 1s linear forwards;
-          animation: progress-bar 1s linear forwards;
-  width: 0;
+  width: 0%;
+  height: 10px;
 }
 .bracket .bar.horizontal::after {
   top: -8.3333333333px;
-  left: -12.5px;
-  -webkit-animation: progress-ball 1s linear forwards;
-          animation: progress-ball 1s linear forwards;
+  left: -8.3333333333px;
 }
 .bracket .bar.vertical {
   width: 10px;
 }
 .bracket .bar.vertical::before {
-  -webkit-animation: progress-bar-v 1s linear forwards;
-          animation: progress-bar-v 1s linear forwards;
-  height: 0;
+  width: 10px;
+  height: 0%;
 }
 .bracket .bar.vertical::after {
-  top: -12.5px;
+  top: -8.3333333333px;
   left: -8.3333333333px;
-  -webkit-animation: progress-ball-v 1s linear forwards;
-          animation: progress-ball-v 1s linear forwards;
 }
 .bracket .left,
 .bracket .right {
-  height: 100%;
-  width: 100%;
-}
-.bracket .left {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.bracket .right {
-  display: flex;
-  flex-direction: column;
+.bracket .right .bar {
+  flex-grow: 1;
 }
-.bracket .right .up,
-.bracket .right .down {
-  height: calc(50% - 5px);
+.bracket .right .vertical {
+  height: 50%;
 }
-.bracket .right .up::before,
-.bracket .right .down::before {
-  -webkit-animation: progress-bar-v 1s 0.99s linear forwards;
-          animation: progress-bar-v 1s 0.99s linear forwards;
-}
-.bracket .right .up::after,
-.bracket .right .down::after {
-  -webkit-animation: progress-ball-v 1s 0.99s linear forwards;
-          animation: progress-ball-v 1s 0.99s linear forwards;
-}
-.bracket .right .middle::before {
-  -webkit-animation: progress-bar 1s 1.98s linear forwards;
-          animation: progress-bar 1s 1.98s linear forwards;
-}
-.bracket .right .middle::after {
-  -webkit-animation: progress-ball 1s 1.98s linear forwards;
-          animation: progress-ball 1s 1.98s linear forwards;
-}
-.bracket .right .down {
+.bracket .right .vertical.down {
   transform: rotate(180deg);
+}
+.bracket .right .vertical::before, .bracket .right .vertical::after {
+  -webkit-animation-delay: 0.35s;
+          animation-delay: 0.35s;
+}
+.bracket .right .horizontal::before, .bracket .right .horizontal::after {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+.anim.horizontal::before {
+  -webkit-animation: progress-bar 0.4s linear forwards;
+          animation: progress-bar 0.4s linear forwards;
+}
+.anim.horizontal::after {
+  -webkit-animation: progress-ball 0.4s linear forwards;
+          animation: progress-ball 0.4s linear forwards;
+}
+.anim.vertical::before {
+  -webkit-animation: progress-bar-v 0.4s linear forwards;
+          animation: progress-bar-v 0.4s linear forwards;
+}
+.anim.vertical::after {
+  -webkit-animation: progress-ball-v 0.4s linear forwards;
+          animation: progress-ball-v 0.4s linear forwards;
 }
 
 @-webkit-keyframes progress-bar {
@@ -237,7 +140,7 @@ body {
 }
 @-webkit-keyframes progress-ball {
   0% {
-    transform: scale(1);
+    transform: scale(0);
     left: -8.3333333333px;
   }
   5% {
@@ -255,7 +158,7 @@ body {
 }
 @keyframes progress-ball {
   0% {
-    transform: scale(1);
+    transform: scale(0);
     left: -8.3333333333px;
   }
   5% {
@@ -273,7 +176,7 @@ body {
 }
 @-webkit-keyframes progress-ball-v {
   0% {
-    transform: scale(1);
+    transform: scale(0);
     top: -8.3333333333px;
   }
   5% {
@@ -291,7 +194,7 @@ body {
 }
 @keyframes progress-ball-v {
   0% {
-    transform: scale(1);
+    transform: scale(0);
     top: -8.3333333333px;
   }
   5% {

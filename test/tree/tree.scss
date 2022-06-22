@@ -7,12 +7,7 @@ body {
 .tournament {
   height: 60%;
   display: flex;
-  justify-content: space-evenly;
-
-  .level,
-  .bracketList {
-    // flex: 1 1 11%;
-  }
+  justify-content: center;
 
   .level {
     height: 100%;
@@ -27,7 +22,47 @@ body {
       justify-content: space-around;
       gap: 10px;
       flex-grow: 1;
-      background-color: coral;
+      // background-color: coral;
+    }
+  }
+
+  .bracketList {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    flex-basis: 5%;
+    gap: 10px;
+
+    &[level="0"] {
+      .bracket {
+        padding: 10% 0;
+      }
+    }
+
+    &[level="1"] {
+      .bracket {
+        padding: 30% 0;
+      }
+    }
+
+    &[level="2"] {
+      .bracket {
+        padding: 70% 0;
+      }
+    }
+
+    &[level="3"] {
+      .bracket {
+        padding: 150% 0;
+      }
+    }
+
+    .bracket {
+      flex: 1 1;
+      // background-color: blue;
+      width: 100%;
     }
   }
 
@@ -44,8 +79,127 @@ body {
       margin-bottom: auto;
     }
   }
+}
 
-  .bracketList {
+// BRACKET STYLES
+$ballSize: 25px;
+$barWidth: 10px;
+$barColor: gray;
+$progressBarColor: coral;
+$progressBallColor: coral;
+$animationDuration: 0.4s;
+$animationDelay: calc($animationDuration - 0.05s);
+
+.bracket {
+  display: flex;
+  margin: 0;
+
+  .bar {
+    margin: 0;
+    background-color: $barColor;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background-color: $progressBarColor;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+
+      width: $ballSize;
+      height: $ballSize;
+      background-color: $progressBallColor;
+
+      border-radius: 50%;
+      transform: scale(0);
+    }
+
+    &.horizontal {
+      height: $barWidth;
+
+      &::before {
+        width: 0%;
+        height: $barWidth;
+      }
+
+      &::after {
+        top: calc(0px - ($ballSize / 3));
+        left: calc(0px - ($ballSize / 3));
+      }
+    }
+
+    &.vertical {
+      width: $barWidth;
+
+      &::before {
+        width: $barWidth;
+        height: 0%;
+      }
+
+      &::after {
+        top: calc(0px - ($ballSize / 3));
+        left: calc(0px - ($ballSize / 3));
+      }
+    }
+  }
+
+  .left,
+  .right {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .right {
+    .bar {
+      flex-grow: 1;
+    }
+
+    .vertical {
+      height: 50%;
+
+      &.down {
+        transform: rotate(180deg);
+      }
+      &::before,
+      &::after {
+        animation-delay: $animationDelay;
+      }
+    }
+
+    .horizontal {
+      &::before,
+      &::after {
+        animation-delay: calc($animationDelay * 2);
+      }
+    }
+  }
+}
+
+.anim {
+  &.horizontal {
+    &::before {
+      animation: progress-bar $animationDuration linear forwards;
+    }
+    &::after {
+      animation: progress-ball $animationDuration linear forwards;
+    }
+  }
+
+  &.vertical {
+    &::before {
+      animation: progress-bar-v $animationDuration linear forwards;
+    }
+    &::after {
+      animation: progress-ball-v $animationDuration linear forwards;
+    }
   }
 }
 
@@ -71,44 +225,44 @@ body {
 
 @keyframes progress-ball {
   0% {
-    transform: scale(1);
-    left: calc(-25px / 3);
+    transform: scale(0);
+    left: calc(0px - $ballSize / 3);
   }
 
   5% {
     transform: scale(1);
-    left: calc(-25px / 3);
+    left: calc(0px - $ballSize / 3);
   }
 
   99% {
     transform: scale(1);
-    left: calc(100% - 10px);
+    left: calc(100% - $barWidth);
   }
 
   100% {
     transform: scale(0);
-    left: calc(100% - 10px);
+    left: calc(100% - $barWidth);
   }
 }
 
 @keyframes progress-ball-v {
   0% {
-    transform: scale(1);
-    top: calc(-25px / 3);
+    transform: scale(0);
+    top: calc(0px - $ballSize / 3);
   }
 
   5% {
     transform: scale(1);
-    top: calc(-25px / 3);
+    top: calc(0px - $ballSize / 3);
   }
 
   99% {
     transform: scale(1);
-    top: calc(100% - 10px);
+    top: calc(100% - $barWidth);
   }
 
   100% {
     transform: scale(0);
-    top: calc(100% - 10px);
+    top: calc(100% - $barWidth);
   }
 }

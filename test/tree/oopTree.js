@@ -105,228 +105,39 @@ function testMatch() {
 }
 
 // testMatch();
-
-//---------------------------------------------------------------------------
-
-function createLevel(index) {
-  var matches = [];
-  var level = index;
-
-  function getLevel() {
-    return level;
-  }
-
-  function getMatch(index) {
-    return matches[index];
-  }
-
-  function getMatches() {
-    return matches;
-  }
-
-  function addMatch(player1, player2) {
-    if (matches.length) {
-      var matchIndex = matches.length;
-    } else {
-      var matchIndex = 0;
-    }
-
-    var match = createMatch(player1, player2, level, matchIndex);
-    matches.push(match);
-  }
-
-  function setWinner(matchIndex, playerNumber) {
-    matches[matchIndex].setWinner(playerNumber);
-  }
-
-  function getWinner(matchIndex) {
-    return matches[matchIndex].getWinner();
-  }
-
-  function getData() {
-    data = {};
-    data.level = level;
-    data.matches = [];
-
-    for (var match of matches) {
-      data.matches.push(match.getData());
-    }
-
-    return data;
-  }
-
-  function setData(o) {
-    level = o.level;
-    var newMatches = o.matches;
-
-    for (var matchData of newMatches) {
-      var match = createMatch();
-      match.setData(matchData);
-      matches.push(match);
-    }
-  }
-
-  return {
-    getLevel,
-    getMatch,
-    getMatches,
-    addMatch,
-    setWinner,
-    getWinner,
-    getData,
-    setData,
-  };
-}
-
-function testLevel() {
-  var level = createLevel(0);
-  level.addMatch("player_a", "player_b");
-  var data = JSON.stringify(level.getData());
-  console.log(data);
-  var new_level = createLevel(1);
-  console.log(new_level.getData());
-  console.log("json ", JSON.parse(data));
-  new_level.setData(JSON.parse(data));
-  console.log(new_level.getData());
-}
-
-//testLevel();
-
 //------------------------------------------------------------------------------
+/*
 
-function createTournament(list = []) {
-  var playerList = list;
-  var levels = [];
 
-  // get the number of matches at level 0
-  var startMatchesNumber = playerList.length / 2;
 
-  //get the number of levels
-  //divide by 2 until it reaches 1
-  var maxLevelsNumber = 1;
-  var i = startMatchesNumber;
 
-  while (i > 1) {
-    maxLevelsNumber++;
-    i = i / 2;
-  }
 
-  //generate the first level randomly
-  var firstLevel = createLevel(0);
 
-  //create [startMatchesNumber] matches with
-  //random names from the player list
-  let copiedList = [...playerList];
-  for (var i = 0; i < startMatchesNumber; i++) {
-    let index1 = Math.floor(Math.random() * copiedList.length);
-    let p1 = copiedList[index1];
-    copiedList.splice(index1, 1);
 
-    let index2 = Math.floor(Math.random() * copiedList.length);
-    let p2 = copiedList[index2];
-    copiedList.splice(index2, 1);
 
-    firstLevel.addMatch(p1, p2);
-  }
 
-  levels.push(firstLevel);
 
-  //create all the other levels
-  let matchesNumber = startMatchesNumber / 2;
 
-  for (let levelIndex = 1; levelIndex < maxLevelsNumber; levelIndex++) {
-    let newLevel = createLevel(levelIndex);
-    for (var i = 0; i < matchesNumber; i++) {
-      newLevel.addMatch();
-    }
-    matchesNumber = matchesNumber / 2;
-    levels.push(newLevel);
-  }
 
-  function getPlayerList() {
-    return playerList;
-  }
 
-  function setPlayerList(list) {
-    playerList = list;
-  }
 
-  function addLevel() {
-    var newLevel = createLevel(levels.length - 1);
-    levels.push(newLevel);
-  }
 
-  function getLevels() {
-    return levels;
-  }
 
-  function getData() {
-    var data = {};
-    data.playerList = playerList;
-    data.levels = [];
 
-    for (l of levels) {
-      data.levels.push(l.getData());
-    }
 
-    return data;
-  }
 
-  function setData(data) {
-    levels = [];
-    playerList = data.playerList;
-    for (l of data.levels) {
-      var newLevel = createLevel();
-      newLevel.setData(l);
-      levels.push(newLevel);
-    }
-  }
 
-  function getWinner(levelIndex, matchIndex) {
-    return levels[levelIndex].getWinner();
-  }
 
-  function setWinner(levelIndex, matchIndex, playerNumber) {
-    //set the winner in the match
-    if (!level[levelIndex].getWinner(matchIndex)) {
-      level[levelIndex].setWinner(matchIndex, playerNumber);
-    } else {
-      return false;
-    }
 
-    //--determine the index of the next match
-    //    euclidean division of the match index by 2
-    //      floored down division
-    let nextMatchIndex = Math.floor(matchIndex / 2);
 
-    //--move the winner to the next match
-    //    if the next match doesn't exist
-    //      create the next match of the next level
-    let nextMatch = createMatch("", "", levelIndex + 1, nextMatchIndex);
-    levels[levelIndex + 1][nextMatchIndex] = nextMatch;
 
-    //  if the match is at the top side of the next match
-    //    set the winner as the first player of the next match
-    //  if the match is at the bottom side of the next match
-    //    set the winner as the second player of the next match
-    if (matchIndex === nextMatchIndex * 2) {
-      setWinner(levelIndex + 1, nextMatchIndex, 1);
-    } else {
-      setWinner(levelIndex + 1, nextMatchIndex, 2);
-    }
-  }
 
-  return {
-    getPlayerList,
-    setPlayerList,
-    addLevel,
-    getLevels,
-    getData,
-    setData,
-    getWinner,
-    setWinner,
-  };
-}
+
+
+
+
+*/
+function createTournament(list = []) {}
 
 function testTournament() {
   const playerList = [
@@ -353,97 +164,39 @@ function testTournament() {
 }
 
 //testTournament();
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 //------------------------------------------------------------------------------
-function createDomManager(tournament, animationTime) {
-  //Initialization
-  //Creation of the element in the Dom
-  //levels and brackets
-  let temp = document.querySelectorAll("template");
-
-  let matchesDom = [];
-  let bracketsDom = [];
-
-  let tournamentDom = document.querySelector(".tournament");
-
-  for (let level of tournament.getLevels()) {
-    let levelDom = document.createElement("div");
-    levelDom.classList.add("level");
-
-    let bracketListDom = document.createElement("div");
-    bracketListDom.classList.add("bracketList");
-
-    for (let match of level.getMatches()) {
-      let matchDom = document.createElement("div");
-      matchDom.classList.add("match");
-
-      console.log(match.getData());
-      console.log(match.getPlayer1);
-
-      matchDom.setAttribute("level", level.getLevel());
-      matchDom.setAttribute("match", match.getLevel());
-
-      let player1Dom = document.createElement("p");
-      player1Dom.classList.add("player");
-      player1Dom.textContent = match.getPlayer1();
-
-      let player2Dom = document.createElement("p");
-      player2Dom.classList.add("player");
-      player2Dom.textContent = match.getPlayer2();
-
-      matchDom.appendChild(player1Dom);
-      matchDom.appendChild(player2Dom);
-
-      levelDom.appendChild(matchDom);
-
-      let bracketDom = temp[0].content.cloneNode(true);
-      bracketListDom.appendChild(bracketDom);
-    }
-
-    tournamentDom.appendChild(levelDom);
-    tournamentDom.appendChild(bracketListDom);
-  }
-
-  let winnerDom = document.createElement("p");
-  winnerDom.classList.add("player", "winner");
-  tournamentDom.appendChild(winnerDom);
-
-  function getPlayers(match) {
-    for (let matchDom of matchesDom) {
-      if (
-        matchDom.getAttribute("level") === levelIndex &&
-        matchDom.getAttribute("match") === matchIndex
-      ) {
-        return matchDom.querySelectorAll("p");
-      }
-    }
-  }
-
-  function triggerAnimation(previousMatchIndex, nextMatchIndex) {
-    let selector = `.bracket[match=${nextMatchIndex}] .middle,`;
-
-    if (nextMatchIndex * 2 === previousMatchIndex) {
-      selector += `.bracket[match=${nextMatchIndex}] .up`;
-    } else {
-      selector += `.bracket[match=${nextMatchIndex}] .down`;
-    }
-
-    let bars = document.querySelectorAll(selector);
-    for (let bar of bars) {
-      bar.classList.add("progress");
-    }
-  }
-
-  function setWinner(previousMatch, nextMatch) {
-    let namesDom = getPlayers(match);
-
-    triggerAnimation(previousMatch.getIndex(), nextMatch.getIndex());
-
-    setTimeout(function () {
-      namesDom[0].textContent = nextMatch.getPlayer1();
-      namesDom[1].textContent = nextMatch.getPlayer2();
-    }, animationTime + 100);
-  }
-}
+function createDomManager(tournament, animationTime) {}
 
 function testDomManager() {
   const playerList = [
