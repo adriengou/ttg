@@ -225,6 +225,11 @@ function createTournament(list = []) {
   }
 
   function setWinner(levelIndex, matchIndex, playerNumber) {
+    //if there is no winner
+    if (getWinner(levelIndex, matchIndex)) {
+      return false;
+    }
+
     //Set winner in the match and set him as a player in the next
     let winner = levels[levelIndex][matchIndex].setWinner(playerNumber);
 
@@ -236,6 +241,7 @@ function createTournament(list = []) {
     } else {
       setPlayer2(nextLevelIndex, nextMatchIndex, winner);
     }
+    return true;
   }
 
   //Object Returns
@@ -272,9 +278,12 @@ function testTournament() {
 
   var t = createTournament(playerList);
   logObject("Début du tournoi", t);
+  console.log(t.setWinner(0, 1, 2));
+  logObject("gagnant", t);
+  console.log(t.setWinner(0, 1, 2));
 }
 
-testTournament();
+// testTournament();
 /*
 
 
@@ -307,7 +316,91 @@ testTournament();
 
 */
 //------------------------------------------------------------------------------
-function createDomManager(tournament, animationTime) {}
+function createDomManager(tournament, animationTime) {
+  let tournamentElem = document.querySelector(".tournament");
+
+  function generate() {
+    //Generate tournament DOM
+    let levels = tournament.getData().levels;
+    for (let levelIndex = 0; levelIndex < levels.length; levelIndex++) {
+      //create a level element
+      let levelElem = document.createElement("div");
+      levelElem.classList.add("level");
+      levelElem.setAttribute("level", levelIndex);
+
+      //create bracket list element
+      let bracketListElem = document.createElement("div");
+      bracketListElem.classList.add("bracketList");
+      bracketListElem.setAttribute("level", levelIndex);
+
+      //add matches and bracket to level  and bracket list
+      for (
+        let matchIndex = 0;
+        matchIndex < levels[levelIndex].length;
+        matchIndex++
+      ) {
+        //create the match
+        let matchElem = document.createElement("div");
+        matchElem.classList.add("match");
+        matchElem.setAttribute("level", levelIndex);
+        matchElem.setAttribute("match", matchIndex);
+
+        //Create the player 1
+        let player1Elem = document.createElement("p");
+        player1Elem.classList.add("player");
+        player1Elem.setAttribute("level", levelIndex);
+        player1Elem.setAttribute("match", matchIndex);
+        player1Elem.setAttribute("player", 1);
+        player1Elem.textContent = levels[levelIndex][matchIndex].player1;
+
+        //Create the player 2
+        let player2Elem = document.createElement("p");
+        player2Elem.classList.add("player");
+        player2Elem.setAttribute("level", levelIndex);
+        player2Elem.setAttribute("match", matchIndex);
+        player2Elem.setAttribute("player", 2);
+        player2Elem.textContent = levels[levelIndex][matchIndex].player2;
+
+        //Add the players to the match
+        matchElem.appendChild(player1Elem);
+        matchElem.appendChild(player2Elem);
+
+        //add match to level
+        levelElem.appendChild(matchElem);
+
+        //create a bracket element
+        let bracketTemp = document.getElementById("bracketTemplate");
+
+        bracketElem = bracketTemp.content.cloneNode(true);
+        bracketElem = bracketElem.querySelector(".bracket");
+        console.log(bracketTemp);
+        bracketElem.classList.add("bracket");
+        bracketElem.setAttribute("level", levelIndex);
+        bracketElem.setAttribute("match", matchIndex);
+
+        //add bracket to bracketList
+        bracketListElem.appendChild(bracketElem);
+      }
+
+      //add level to tournament
+      tournamentElem.appendChild(levelElem);
+
+      //add bracket list to tournament
+      tournamentElem.appendChild(bracketListElem);
+    }
+    // add tournament to body
+    document.body.appendChild(tournamentElem);
+    console.log(tournamentElem);
+  }
+
+  function addEvents() {}
+
+  function setWinner(elem) {
+    let;
+  }
+
+  return { generate };
+}
 
 function testDomManager() {
   const playerList = [
@@ -328,13 +421,13 @@ function testDomManager() {
     "Jeffrey VALENTIN",
     "Manuel AGUET",
   ];
-
   let tournament = createTournament(playerList);
   logObject("tournament data: \n", tournament);
-  let domManager = createDomManager(tournament, 0.4);
+  let domManager = createDomManager(tournament);
+  domManager.generate();
 }
 
-// testDomManager();
+testDomManager();
 //------------------------------------------------------------------------------
 
 function logObject(text, o) {
