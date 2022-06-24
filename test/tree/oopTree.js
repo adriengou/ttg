@@ -320,6 +320,8 @@ function createDomManager(tournament, animationTime) {
   let tournamentElem = document.querySelector(".tournament");
 
   function generate() {
+    // add tournament to body
+    document.body.appendChild(tournamentElem);
     //Generate tournament DOM
     let levels = tournament.getData().levels;
     for (let levelIndex = 0; levelIndex < levels.length; levelIndex++) {
@@ -327,6 +329,9 @@ function createDomManager(tournament, animationTime) {
       let levelElem = document.createElement("div");
       levelElem.classList.add("level");
       levelElem.setAttribute("level", levelIndex);
+
+      //add level to tournament
+      tournamentElem.appendChild(levelElem);
 
       //create bracket list element
       let bracketListElem = document.createElement("div");
@@ -340,57 +345,49 @@ function createDomManager(tournament, animationTime) {
         matchIndex++
       ) {
         //create the match
-        let matchElem = document.createElement("div");
-        matchElem.classList.add("match");
-        matchElem.setAttribute("level", levelIndex);
+        let matchElem = document.getElementById("matchTemplate");
+        matchElem = matchElem.content.cloneNode(true);
+        matchElem = matchElem.querySelector(".match");
         matchElem.setAttribute("match", matchIndex);
-
-        //Create the player 1
-        let player1Elem = document.createElement("p");
-        player1Elem.classList.add("player");
-        player1Elem.setAttribute("level", levelIndex);
-        player1Elem.setAttribute("match", matchIndex);
-        player1Elem.setAttribute("player", 1);
-        player1Elem.textContent = levels[levelIndex][matchIndex].player1;
-
-        //Create the player 2
-        let player2Elem = document.createElement("p");
-        player2Elem.classList.add("player");
-        player2Elem.setAttribute("level", levelIndex);
-        player2Elem.setAttribute("match", matchIndex);
-        player2Elem.setAttribute("player", 2);
-        player2Elem.textContent = levels[levelIndex][matchIndex].player2;
-
-        //Add the players to the match
-        matchElem.appendChild(player1Elem);
-        matchElem.appendChild(player2Elem);
+        matchElem.setAttribute("level", levelIndex);
 
         //add match to level
         levelElem.appendChild(matchElem);
 
-        //create a bracket element
-        let bracketTemp = document.getElementById("bracketTemplate");
+        //Create the player 1
+        let playersElem = matchElem.querySelectorAll(".player");
+        playersElem[0].setAttribute("match", matchIndex);
+        playersElem[0].setAttribute("level", levelIndex);
+        playersElem[0].setAttribute("player", 1);
+        //Create the player 2
+        playersElem[1].setAttribute("match", matchIndex);
+        playersElem[1].setAttribute("level", levelIndex);
+        playersElem[1].setAttribute("player", 2);
 
-        bracketElem = bracketTemp.content.cloneNode(true);
-        bracketElem = bracketElem.querySelector(".bracket");
-        console.log(bracketTemp);
-        bracketElem.classList.add("bracket");
-        bracketElem.setAttribute("level", levelIndex);
+        //bracket elem
+        let bracketElem = matchElem.querySelector(".bracket");
         bracketElem.setAttribute("match", matchIndex);
-
-        //add bracket to bracketList
-        bracketListElem.appendChild(bracketElem);
+        bracketElem.setAttribute("level", levelIndex);
       }
-
-      //add level to tournament
-      tournamentElem.appendChild(levelElem);
-
-      //add bracket list to tournament
-      tournamentElem.appendChild(bracketListElem);
     }
-    // add tournament to body
-    document.body.appendChild(tournamentElem);
-    console.log(tournamentElem);
+
+    setInterval(() => {
+      let matchesElem = document.querySelectorAll(".match");
+      for (matchElem of matchesElem) {
+        let playersElem = matchElem.querySelectorAll(".player");
+        let playersELemHeight = [
+          playersElem[0].getBoundingClientRect().top,
+          playersElem[1].getBoundingClientRect().bottom,
+        ];
+        let playerElemHeight = playersElem[0].getBoundingClientRect().height;
+        let bracketElem = matchElem.querySelector(".bracket");
+        bracketElem.style.height = `${
+          playersELemHeight[1] -
+          playersELemHeight[0] -
+          2 * (playerElemHeight / 3)
+        }px`;
+      }
+    }, 1000);
   }
 
   function addEvents() {}

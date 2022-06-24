@@ -4,8 +4,16 @@ body {
   height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .tournament {
-  height: 60%;
+  height: 70%;
+  width: 80%;
   display: flex;
   justify-content: center;
 
@@ -14,55 +22,31 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 10px;
-
+    // gap: 40px;
+    flex: 1 1;
     .match {
       display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      gap: 10px;
-      flex-grow: 1;
-      // background-color: coral;
-    }
-  }
+      flex-direction: row;
 
-  .bracketList {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    flex-basis: 5%;
-    gap: 10px;
-
-    &[level="0"] {
-      .bracket {
-        padding: 10% 0;
-      }
-    }
-
-    &[level="1"] {
-      .bracket {
-        padding: 30% 0;
-      }
-    }
-
-    &[level="2"] {
-      .bracket {
-        padding: 70% 0;
-      }
-    }
-
-    &[level="3"] {
-      .bracket {
-        padding: 150% 0;
-      }
-    }
-
-    .bracket {
+      // gap: 10px;
       flex: 1 1;
-      // background-color: blue;
-      width: 100%;
+      // background-color: coral;
+      background-color: blue;
+      align-items: center;
+
+      .bracket {
+        flex: 1 1;
+      }
+      .players {
+        flex: 2 2;
+      }
+
+      .players {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
+      }
     }
   }
 
