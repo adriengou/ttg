@@ -159,7 +159,7 @@ function createTournament(list = []) {
 
     let randomIndex2 = Math.floor(Math.random() * listClone.length);
     let randomName2 = listClone[randomIndex2];
-    listClone.splice(randomIndex1, 1);
+    listClone.splice(randomIndex2, 1);
 
     let match = createMatch(randomName1, randomName2, 0, i);
     firstLevel.push(match);
@@ -226,22 +226,30 @@ function createTournament(list = []) {
 
   function setWinner(levelIndex, matchIndex, playerNumber) {
     //if there is no winner
-    if (getWinner(levelIndex, matchIndex)) {
+    if (
+      getWinner(levelIndex, matchIndex) ||
+      !getPlayer1(levelIndex, matchIndex) ||
+      !getPlayer2(levelIndex, matchIndex)
+    ) {
       return false;
     }
 
     //Set winner in the match and set him as a player in the next
     let winner = levels[levelIndex][matchIndex].setWinner(playerNumber);
 
-    let nextLevelIndex = levelIndex + 1;
-    let nextMatchIndex = Math.floor(matchIndex / 2);
-
-    if (matchIndex % 2 === 0) {
-      setPlayer1(nextLevelIndex, nextMatchIndex, winner);
+    if (levelIndex === 3) {
+      return winner;
     } else {
-      setPlayer2(nextLevelIndex, nextMatchIndex, winner);
+      let nextLevelIndex = levelIndex + 1;
+      let nextMatchIndex = Math.floor(matchIndex / 2);
+
+      if (matchIndex % 2 === 0) {
+        setPlayer1(nextLevelIndex, nextMatchIndex, winner);
+      } else {
+        setPlayer2(nextLevelIndex, nextMatchIndex, winner);
+      }
+      return [true, nextLevelIndex, nextMatchIndex, winner];
     }
-    return true;
   }
 
   //Object Returns
@@ -316,7 +324,7 @@ function testTournament() {
 
 */
 //------------------------------------------------------------------------------
-function createDomManager(tournament, animationTime) {
+function createTreeDomManager(tournament, animationTime) {
   let tournamentElem = document.querySelector(".tournament");
 
   function generate() {
@@ -359,10 +367,12 @@ function createDomManager(tournament, animationTime) {
         playersElem[0].setAttribute("match", matchIndex);
         playersElem[0].setAttribute("level", levelIndex);
         playersElem[0].setAttribute("player", 1);
+        playersElem[0].textContent = levels[levelIndex][matchIndex].player1;
         //Create the player 2
         playersElem[1].setAttribute("match", matchIndex);
         playersElem[1].setAttribute("level", levelIndex);
         playersElem[1].setAttribute("player", 2);
+        playersElem[1].textContent = levels[levelIndex][matchIndex].player2;
 
         //bracket elem
         let bracketElem = matchElem.querySelector(".bracket");
@@ -387,16 +397,92 @@ function createDomManager(tournament, animationTime) {
           2 * (playerElemHeight / 3)
         }px`;
       }
-    }, 1000);
+    }, 100);
+
+    let winnerElem = document.createElement("p");
+    winnerElem.classList.add("winner", "player");
+    tournamentElem.appendChild(winnerElem);
   }
 
-  function addEvents() {}
+  function addEvents() {
+    let playersElem = tournamentElem.querySelectorAll(".player");
+
+    for (const playerElem of playersElem) {
+      if (playerElem.classList.contains("winner")) {
+        continue;
+      }
+
+      playerElem.addEventListener("click", function (e) {
+        setWinner(playerElem);
+      });
+    }
+  }
 
   function setWinner(elem) {
-    let;
+    if (typeof elem === "string") {
+      return false;
+    }
+
+    let levelIndex = parseInt(elem.getAttribute("level"));
+    let matchIndex = parseInt(elem.getAttribute("match"));
+    let playerIndex = parseInt(elem.getAttribute("player"));
+
+    let r;
+
+    r = tournament.setWinner(levelIndex, matchIndex, playerIndex);
+    if (!r) {
+      return false;
+    }
+
+    //get bracket Elem
+    let bracketElem = tournamentElem.querySelector(
+      `.bracket[level="${levelIndex}"][match="${matchIndex}"]`
+    );
+
+    //if the players is up set animation to up bars
+    //else set animation to bottom bars
+    let barsElem;
+    if (playerIndex === 1) {
+      //get up bars and middle
+      barsElem = bracketElem.querySelectorAll(".up, .middle");
+    } else {
+      barsElem = bracketElem.querySelectorAll(".down, .middle");
+    }
+
+    for (const elem of barsElem) {
+      elem.classList.add("anim");
+    }
+
+    let nextPlayerIndex;
+    if (matchIndex % 2 === 0) {
+      nextPlayerIndex = 1;
+    } else {
+      nextPlayerIndex = 2;
+    }
+
+    let nextPlayerElem;
+    if (levelIndex < 3) {
+      nextPlayerElem = document.querySelector(
+        `[level="${r[1]}"][match="${r[2]}"][player="${nextPlayerIndex}"]`
+      );
+    } else {
+      nextPlayerElem = document.querySelector(`.winner`);
+    }
+
+    barsElem[2].addEventListener(
+      "animationend",
+      function () {
+        if (levelIndex < 3) {
+          nextPlayerElem.textContent = r[3];
+        } else {
+          nextPlayerElem.textContent = r;
+        }
+      },
+      false
+    );
   }
 
-  return { generate };
+  return { generate, addEvents };
 }
 
 function testDomManager() {
@@ -420,8 +506,9 @@ function testDomManager() {
   ];
   let tournament = createTournament(playerList);
   logObject("tournament data: \n", tournament);
-  let domManager = createDomManager(tournament);
+  let domManager = createTreeDomManager(tournament);
   domManager.generate();
+  domManager.addEvents();
 }
 
 testDomManager();
