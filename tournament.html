@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="./css/tournament.css">
+        <link rel="stylesheet" href="./css/tree.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Sans&family=Roboto&display=swap"
@@ -162,9 +163,30 @@
                     <p>Tournament</p>
                     <p>Tree</p>
                 </h2>
+                <div class="tree"></div>
                 <a class="button_style" href="#group">Back</a>
             </section>
         </main>
     </body>
-
+    <template id="matchTemplate">
+      <div class="match">
+        <div class="players">
+          <p class="player"></p>
+          <p class="player"></p>
+        </div>
+        <div class="bracket">
+          <div class="left">
+            <div class="bar horizontal up"></div>
+            <div class="bar horizontal down"></div>
+          </div>
+          <div class="right">
+            <div class="bar vertical up"></div>
+            <div class="bar horizontal middle"></div>
+            <div class="bar vertical down"></div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <script src="js/oopTree.js"></script>
+    <script src="js/drag_and_drop.js"></script>
 </html>

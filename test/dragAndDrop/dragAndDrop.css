@@ -1,0 +1,37 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dragndrop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  border: 1px solid black;
+}
+.dragndrop .square {
+  width: 100px;
+  height: 100px;
+}
+.dragndrop .square#s1 {
+  background-color: coral;
+}
+.dragndrop .square#s2 {
+  background-color: royalblue;
+}
+.dragndrop .square#s3 {
+  background-color: crimson;
+}
+.dragndrop .square#s4 {
+  background-color: green;
+}/*# sourceMappingURL=dragAndDrop.css.map */

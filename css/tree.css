@@ -32,10 +32,15 @@
 .tree .player {
   margin: 0;
   min-width: 20ch;
-  border: 1px solid black;
+  border: 1px solid #87f3da;
   text-align: center;
   height: 3ch;
   line-height: 3ch;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
 }
 .tree .player.winner {
   margin-top: auto;
@@ -48,7 +53,7 @@
 }
 .bracket .bar {
   margin: 0;
-  background-color: gray;
+  background-color: #c6d6dc;
   position: relative;
 }
 .bracket .bar::before {

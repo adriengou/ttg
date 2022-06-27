@@ -41,11 +41,14 @@
   .player {
     margin: 0;
     min-width: 20ch;
-    border: 1px solid black;
+    border: 1px solid #87f3da;
     text-align: center;
 
     height: 3ch;
     line-height: 3ch;
+
+    user-select: none;
+    cursor: pointer;
 
     &.winner {
       margin-top: auto;
@@ -57,7 +60,7 @@
 // BRACKET STYLES
 $ballSize: 25px;
 $barWidth: 10px;
-$barColor: gray;
+$barColor: #c6d6dc;
 $progressBarColor: coral;
 $progressBallColor: coral;
 $animationDuration: 0.4s;
