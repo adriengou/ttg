@@ -23,20 +23,8 @@ body {
     width: 100px;
     height: 100px;
 
-    &#s1 {
-      background-color: coral;
-    }
-
-    &#s2 {
-      background-color: royalblue;
-    }
-
-    &#s3 {
-      background-color: crimson;
-    }
-
-    &#s4 {
-      background-color: green;
-    }
+    border: 1px solid black;
+    text-align: center;
+    line-height: 6rem;
   }
 }

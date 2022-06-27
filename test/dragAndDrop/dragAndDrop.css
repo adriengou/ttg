@@ -22,16 +22,7 @@ body {
 .dragndrop .square {
   width: 100px;
   height: 100px;
-}
-.dragndrop .square#s1 {
-  background-color: coral;
-}
-.dragndrop .square#s2 {
-  background-color: royalblue;
-}
-.dragndrop .square#s3 {
-  background-color: crimson;
-}
-.dragndrop .square#s4 {
-  background-color: green;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 6rem;
 }/*# sourceMappingURL=dragAndDrop.css.map */
