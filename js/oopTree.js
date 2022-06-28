@@ -1,3 +1,13 @@
+function logObject(text, o) {
+  let data = o.getData();
+  data = JSON.stringify(data, null, 4);
+  console.log("-".repeat(100));
+  console.log(text);
+  console.log(data);
+  console.log("-".repeat(100));
+}
+//------------------------------------------------------------------------------
+
 function createMatch(player1 = "", player2 = "", level = 0, index = 0) {
   var winner = "";
 
@@ -510,15 +520,177 @@ function testDomManager() {
   domManager.addEvents();
 }
 
-testDomManager();
+// testDomManager();
 //------------------------------------------------------------------------------
+/*
 
-function logObject(text, o) {
-  let data = o.getData();
-  data = JSON.stringify(data, null, 4);
-  console.log("-".repeat(100));
-  console.log(text);
-  console.log(data);
-  console.log("-".repeat(100));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+function createGroupDomManager() {
+  const playerSelector = ".name_group p";
+  const playersElements = document.querySelectorAll(playerSelector);
+  const shuffleBtn = document.querySelector("#group > button");
+
+  function shuffle() {
+    let names = [];
+    for (const el of playersElements) {
+      names.push(el.textContent);
+    }
+
+    let newList = [];
+
+    while (names.length) {
+      let r = Math.floor(Math.random() * names.length);
+      newList.push(names.splice(r, 1));
+    }
+
+    for (let i = 0; i < newList.length; i++) {
+      playersElements[i].textContent = newList[i];
+    }
+  }
+
+  function getPlayerList() {
+    let list = [];
+    for (const el of playersElements) {
+      list.push(el.textContent);
+    }
+    return list;
+  }
+
+  //Events
+  shuffleBtn.addEventListener("click", shuffle);
+
+  //Return
+  return {
+    shuffle,
+    getPlayerList,
+  };
 }
-//------------------------------------------------------------------------------
+
+function testGroupDomManager() {
+  let groupMan = createGroupDomManager();
+}
+//testGroupDomManager();
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+function createSettingsDomManager() {
+  const nameDom = document.querySelector(
+    "#settings > div > div.column.left_column > div:nth-child(1) > input[type=text]"
+  );
+
+  const gameDom = document.querySelector(
+    "#settings > div > div.column.left_column > div:nth-child(2) > input[type=text]"
+  );
+
+  const randomDom = document.querySelector(
+    "#settings > div > div.column.left_column > div:nth-child(3) > div > input[type=checkbox]"
+  );
+
+  const playersDom = document.querySelector(
+    "#settings > div > div.column.right_column > textarea"
+  );
+
+  const form = { nameDom, gameDom, randomDom, playersDom };
+
+  const popupDom = document.querySelector("#settings .popup");
+
+  function showPopup(error) {
+    let textDom = popupDom.querySelector("p");
+    textDom.textContent = error;
+    popupDom.classList.remove("hidden");
+  }
+
+  function validate() {
+    let isValid = true;
+
+    //no field empty
+    isValid = nameDom.value.length > 0 ? isValid : false;
+
+    isValid = gameDom.value.length > 0 ? isValid : false;
+
+    isValid = playersDom.value.length > 0 ? isValid : false;
+
+    if (!isValid) {
+      showPopup("A field is empty !");
+      return false;
+    }
+
+    //odd number of players
+    let lines = playersDom.value.split("\n");
+    if (lines.length % 2 !== 0) {
+      showPopup("It needs an even amount of players !");
+      return false;
+    }
+  }
+
+  //event
+  const popupBtnDom = popupDom.querySelector("button");
+  popupBtnDom.addEventListener("click", function (e) {
+    popupDom.classList.add("hidden");
+  });
+
+  return {
+    validate,
+  };
+}
+
+function testSettingsDomManager() {
+  let settMan = createSettingsDomManager();
+  settMan.validate();
+}

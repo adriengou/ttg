@@ -1,10 +1,11 @@
 //config
-const elemSelector = ".square";
+const elemSelector = ".name_group p";
 
 //dom elements
 const elements = document.querySelectorAll(elemSelector);
 let squares = [];
 for (let index = 0; index < elements.length; index++) {
+  console.log(elements[index].getBoundingClientRect());
   squares.push({
     dom: elements[index],
     x: elements[index].getBoundingClientRect().x,
@@ -12,6 +13,7 @@ for (let index = 0; index < elements.length; index++) {
     start: elements[index].getBoundingClientRect(),
   });
 }
+console.log(squares);
 
 //variables
 let selectedElement = false;
@@ -31,9 +33,9 @@ function elementsOverlap(el1, el2) {
 
   return !(
     domRect1.top > domRect2.bottom ||
-    domRect1.right < domRect2.left ||
+    domRect1.right + window.innerWidth < domRect2.left ||
     domRect1.bottom < domRect2.top ||
-    domRect1.left > domRect2.right
+    domRect1.left + window.innerWidth > domRect2.right
   );
 }
 
@@ -64,9 +66,17 @@ function swapElement(el1, el2) {
 document.addEventListener("mousemove", function (e) {
   if (selectedElement !== false) {
     moveElement(squares[selectedElement], e.clientX, e.clientY, true);
+    squares[selectedElement].dom.style.zIndex = "100";
 
     for (let index = 0; index < squares.length; index++) {
       if (index !== selectedElement) {
+        if (index === 0) {
+          console.log(
+            squares[selectedElement].dom.getBoundingClientRect(),
+            squares[index].start
+          );
+        }
+
         if (
           elementsOverlap(squares[selectedElement].dom, squares[index].start)
         ) {
@@ -103,7 +113,10 @@ document.addEventListener("mouseup", function (e) {
   } else if (selectedElement !== false) {
     squares[selectedElement].dom.style.transform = "translate(0px, 0px)";
   }
-  selectedElement = false;
+  if (selectedElement) {
+    squares[selectedElement].dom.style.zIndex = "0";
+    selectedElement = false;
+  }
 });
 
 for (let index = 0; index < squares.length; index++) {

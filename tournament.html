@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="./css/tournament.css">
         <link rel="stylesheet" href="./css/tree.css">
+        <link rel="stylesheet" href="./css/setthingsPopup.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Sans&family=Roboto&display=swap"
@@ -37,6 +38,10 @@
         </header>
         <main>
             <section class="tournament_section" id="settings">
+                <div class="popup hidden">
+                  <p>Some errors goes here</p>
+                  <button>ok</button>
+                </div>
                 <h2 class="title">
                     <p>Tournament</p>
                     <p>Settings</p>
@@ -47,14 +52,7 @@
                             <label for="">Name:</label>
                             <input type="text" name="" id="">
                         </div>
-                        <div class="row">
-                            <label for="">Type:</label>
-                            <select name="" id="">
-                                <option value="">type 1</option>
-                                <option value="">type 2</option>
-                                <option value="">type 3</option>
-                            </select>
-                        </div>
+
                         <div class="row">
                             <label for="">Game / Sport:</label>
                             <input type="text" name="" id="">
@@ -64,13 +62,6 @@
                             <div>
                                 <input type="checkbox" name="" id="">
                             </div>
-                        </div>
-                        <div class="row">
-                            <label for="">Size:</label>
-                            <div>
-                                <input type="number" name="" id="">
-                            </div>
-
                         </div>
                     </div>
                     <div class="column right_column">
@@ -86,6 +77,7 @@
                     <p>Groups</p>
                 </h2>
                 <p id="description">Drag and drop contestants to swap their places</p>
+                <button class="button_style">Shuffle</button>
                 <div id="card_group">
                     <div class="card">
                         <div class="card_title">
@@ -187,6 +179,8 @@
         </div>
       </div>
     </template>
+    <!-- <script src="settings.js"></script> -->
     <script src="js/oopTree.js"></script>
     <script src="js/drag_and_drop.js"></script>
+    <!-- <script src="js/shuffle.js"></script> -->
 </html>

@@ -25,4 +25,8 @@ body {
   border: 1px solid black;
   text-align: center;
   line-height: 6rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }/*# sourceMappingURL=dragAndDrop.css.map */
