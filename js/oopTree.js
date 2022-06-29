@@ -149,59 +149,70 @@ function testMatch() {
 
 
 */
-function createTournament(list = []) {
+function createTournament() {
   //Variables
+  let playerList;
   //an array for all the levels
-  levels = [];
+  let levels = [];
 
-  //Number of players
-  let numberOfPlayers = list.length;
+  function init(list) {
+    levels = [];
+    playerList = [...list];
+    //Number of players
+    let numberOfPlayers = list.length;
 
-  //Initialization
-  //Generate the first level with matches with random players
-  let firstLevel = [];
-  let listClone = [...list];
+    //Initialization
+    //Generate the first level with matches with random players
+    let firstLevel = [];
+    let listClone = [...list];
 
-  for (let i = 0; i < numberOfPlayers / 2; i++) {
-    let randomIndex1 = Math.floor(Math.random() * listClone.length);
-    let randomName1 = listClone[randomIndex1];
-    listClone.splice(randomIndex1, 1);
+    for (let i = 0; i < numberOfPlayers / 2; i++) {
+      // let randomIndex1 = Math.floor(Math.random() * listClone.length);
+      // let randomName1 = listClone[randomIndex1];
+      // listClone.splice(randomIndex1, 1);
 
-    let randomIndex2 = Math.floor(Math.random() * listClone.length);
-    let randomName2 = listClone[randomIndex2];
-    listClone.splice(randomIndex2, 1);
+      // let randomIndex2 = Math.floor(Math.random() * listClone.length);
+      // let randomName2 = listClone[randomIndex2];
+      // listClone.splice(randomIndex2, 1);
 
-    let match = createMatch(randomName1, randomName2, 0, i);
-    firstLevel.push(match);
-  }
+      // let match = createMatch(randomName1, randomName2, 0, i);
+      // firstLevel.push(match);
 
-  levels.push(firstLevel);
+      let name1 = listClone.shift();
+      let name2 = listClone.shift();
 
-  // How many levels there is
-  let numberOfLevels = 1;
-
-  let n = levels[0].length; //The number of matches in the first level
-
-  while (n > 1) {
-    n = n / 2;
-    numberOfLevels++;
-  }
-
-  // Generate all the other levels with empty matches
-  n = levels[0].length / 2;
-
-  for (let i = 1; i < numberOfLevels; i++) {
-    levels.push([]);
-    for (let j = 0; j < n; j++) {
-      levels[i].push(createMatch("", "", i, j));
+      let match = createMatch(name1, name2, 0, i);
+      firstLevel.push(match);
     }
-    n = n / 2;
+
+    levels.push(firstLevel);
+
+    // How many levels there is
+    let numberOfLevels = 1;
+
+    let n = levels[0].length; //The number of matches in the first level
+
+    while (n > 1) {
+      n = n / 2;
+      numberOfLevels++;
+    }
+
+    // Generate all the other levels with empty matches
+    n = levels[0].length / 2;
+
+    for (let i = 1; i < numberOfLevels; i++) {
+      levels.push([]);
+      for (let j = 0; j < n; j++) {
+        levels[i].push(createMatch("", "", i, j));
+      }
+      n = n / 2;
+    }
   }
 
   //Methods
   function getData() {
     let data = {};
-    data.playerList = list;
+    data.playerList = playerList;
     data.levels = [];
 
     for (let level of levels) {
@@ -271,6 +282,7 @@ function createTournament(list = []) {
     setPlayer2,
     getWinner,
     setWinner,
+    init,
   };
 }
 
@@ -337,10 +349,23 @@ function testTournament() {
 function createTreeDomManager(tournament, animationTime) {
   let tournamentElem = document.querySelector(".tree");
 
+  console.log("tournoi à la création");
+  console.log(tournamentElem, tournamentElem.innerHTML);
+
+  let bracketInterval;
+
   function generate() {
+    //reset the dom
+    console.log(tournamentElem, tournamentElem.innerHTML);
+
+    tournamentElem.innerHTML = "";
+    console.log("tournoi avant generation: ");
+    console.log(tournamentElem, tournamentElem.innerHTML);
+
     // add tournament to body
     //Generate tournament DOM
     let levels = tournament.getData().levels;
+
     for (let levelIndex = 0; levelIndex < levels.length; levelIndex++) {
       //create a level element
       let levelElem = document.createElement("div");
@@ -390,27 +415,31 @@ function createTreeDomManager(tournament, animationTime) {
       }
     }
 
-    setInterval(() => {
-      let matchesElem = document.querySelectorAll(".match");
-      for (matchElem of matchesElem) {
-        let playersElem = matchElem.querySelectorAll(".player");
-        let playersELemHeight = [
-          playersElem[0].getBoundingClientRect().top,
-          playersElem[1].getBoundingClientRect().bottom,
-        ];
-        let playerElemHeight = playersElem[0].getBoundingClientRect().height;
-        let bracketElem = matchElem.querySelector(".bracket");
-        bracketElem.style.height = `${
-          playersELemHeight[1] -
-          playersELemHeight[0] -
-          2 * (playerElemHeight / 3)
-        }px`;
-      }
-    }, 100);
+    if (!bracketInterval) {
+      bracketInterval = setInterval(() => {
+        let matchesElem = document.querySelectorAll(".match");
+        for (matchElem of matchesElem) {
+          let playersElem = matchElem.querySelectorAll(".player");
+          let playersELemHeight = [
+            playersElem[0].getBoundingClientRect().top,
+            playersElem[1].getBoundingClientRect().bottom,
+          ];
+          let playerElemHeight = playersElem[0].getBoundingClientRect().height;
+          let bracketElem = matchElem.querySelector(".bracket");
+          bracketElem.style.height = `${
+            playersELemHeight[1] -
+            playersELemHeight[0] -
+            2 * (playerElemHeight / 3)
+          }px`;
+        }
+      }, 100);
+    }
 
     let winnerElem = document.createElement("p");
     winnerElem.classList.add("winner", "player");
     tournamentElem.appendChild(winnerElem);
+    console.log("tournoi apres generation: ");
+    console.log(tournamentElem, tournamentElem.innerHTML);
   }
 
   function addEvents() {
@@ -550,8 +579,6 @@ function testDomManager() {
 
 
 
-
-
 */
 function createGroupDomManager() {
   const playerSelector = ".name_group p";
@@ -559,10 +586,7 @@ function createGroupDomManager() {
   const shuffleBtn = document.querySelector("#group > button");
 
   function shuffle() {
-    let names = [];
-    for (const el of playersElements) {
-      names.push(el.textContent);
-    }
+    let names = getPlayerList();
 
     let newList = [];
 
@@ -584,6 +608,16 @@ function createGroupDomManager() {
     return list;
   }
 
+  function setPlayerList(list) {
+    for (let i = 0; i < playersElements.length; i++) {
+      if (i >= list.length) {
+        playersElements[i].textContent = "";
+      } else {
+        playersElements[i].textContent = list[i];
+      }
+    }
+  }
+
   //Events
   shuffleBtn.addEventListener("click", shuffle);
 
@@ -591,6 +625,7 @@ function createGroupDomManager() {
   return {
     shuffle,
     getPlayerList,
+    setPlayerList,
   };
 }
 
@@ -658,8 +693,15 @@ function createSettingsDomManager() {
 
   function validate() {
     let isValid = true;
+    let message = "";
 
-    //no field empty
+    console.log(
+      nameDom.value.length,
+      gameDom.value.length,
+      playersDom.value.length,
+      playersDom.value
+    );
+    //no empty field
     isValid = nameDom.value.length > 0 ? isValid : false;
 
     isValid = gameDom.value.length > 0 ? isValid : false;
@@ -667,16 +709,54 @@ function createSettingsDomManager() {
     isValid = playersDom.value.length > 0 ? isValid : false;
 
     if (!isValid) {
-      showPopup("A field is empty !");
-      return false;
+      message += "A field is empty !";
+      isValid = false;
     }
 
     //odd number of players
     let lines = playersDom.value.split("\n");
-    if (lines.length % 2 !== 0) {
-      showPopup("It needs an even amount of players !");
-      return false;
+
+    //number of lines
+    let n = 0;
+    for (const l of lines) {
+      if (l !== "") {
+        n++;
+      }
     }
+
+    if (n % 2 !== 0) {
+      message += "\nIt needs an even amount of players !";
+      isValid = false;
+    }
+
+    if (!isValid) {
+      showPopup(message);
+    }
+
+    return isValid;
+  }
+
+  function getSettings() {
+    return {
+      name: nameDom.value,
+      game: gameDom.value,
+      random: randomDom.checked,
+    };
+  }
+
+  function setSettings(name, game, random) {
+    nameDom.value = name;
+    gameDom.value = game;
+    randomDom.checked = random;
+  }
+
+  function getPlayerList() {
+    let list = playersDom.value.split("\n");
+    return list;
+  }
+
+  function getRandomStatus() {
+    return randomDom.checked;
   }
 
   //event
@@ -687,6 +767,10 @@ function createSettingsDomManager() {
 
   return {
     validate,
+    getPlayerList,
+    getRandomStatus,
+    getSettings,
+    setSettings,
   };
 }
 
@@ -694,3 +778,195 @@ function testSettingsDomManager() {
   let settMan = createSettingsDomManager();
   settMan.validate();
 }
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+function createStorageManager() {
+  function save(settings, list) {
+    let saveName = settings.name;
+    let save = {
+      settings,
+      list,
+    };
+
+    localStorage.setItem(saveName, JSON.stringify(save));
+  }
+
+  function load(saveName) {
+    return JSON.parse(localStorage.getItem(saveName));
+  }
+
+  return {
+    save,
+    load,
+  };
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+function createTournamentDomManager(
+  tournament,
+  settingMan,
+  groupMan,
+  treeMan,
+  storageManager
+) {
+  const parent = document.querySelector("main");
+  const settingsNext = document.querySelector("#settings > button");
+
+  const groupBack = document.querySelector(
+    "#group > div.button_wrapper > button:nth-child(1)"
+  );
+
+  const groupNext = document.querySelector(
+    "#group > div.button_wrapper > button:nth-child(2)"
+  );
+
+  const treeBack = document.querySelector("#tree > button");
+
+  function saveTournament() {
+    storageManager.save(settingMan.getSettings(), groupMan.getPlayerList());
+  }
+
+  settingsNext.addEventListener("click", function (e) {
+    if (!settingMan.validate()) {
+      return false;
+    }
+
+    let list = settingMan.getPlayerList();
+    groupMan.setPlayerList(list);
+    if (settingMan.getRandomStatus()) {
+      groupMan.shuffle();
+    }
+
+    parent.scroll({
+      top: 0,
+      left: window.innerWidth,
+      behavior: "smooth",
+    });
+  });
+
+  groupBack.addEventListener("click", function (e) {
+    parent.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+
+  groupNext.addEventListener("click", function (e) {
+    let playerList = groupMan.getPlayerList();
+    tournament.init(playerList);
+
+    console.log("TOURNAMENT DATA");
+    console.log(playerList);
+
+    treeMan.generate();
+    treeMan.addEvents();
+
+    parent.scroll({
+      top: 0,
+      left: 2 * window.innerWidth,
+      behavior: "smooth",
+    });
+  });
+
+  treeBack.addEventListener("click", function (e) {
+    parent.scroll({
+      top: 0,
+      left: window.innerWidth,
+      behavior: "smooth",
+    });
+  });
+}
+
+function testDomManager() {
+  let tournament = createTournament();
+  let treeMan = createTreeDomManager(tournament);
+  let settingMan = createSettingsDomManager();
+  let groupMan = createGroupDomManager();
+
+  let tourMan = createTournamentDomManager(
+    tournament,
+    settingMan,
+    groupMan,
+    treeMan
+  );
+}
+
+testDomManager();
+
+/*
+Adrien GOUACIDE
+Nicolas DUCHÊNE
+Stéphanie CHARY
+Nathan TEISSIER
+Matteo FRA
+Imane QAJJOU
+Enzo MARTINEZ
+Sirikone KEOHAVONG
+Fatiha ABDELLAOUI
+Audrey CANNESSON
+Abdelkrim KISSOUM
+Sarah CASARIN
+Tarek KOUSSAIER
+Fouad MESBAH
+Jeffrey VALENTIN
+Manuel AGUET
+*/

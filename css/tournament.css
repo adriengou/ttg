@@ -206,6 +206,7 @@ main {
 
 .name_group p {
   width: 90%;
+  height: 28px;
   border: #64ffda 1px solid;
   user-select: none;
   background-color: #112240;

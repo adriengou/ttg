@@ -5,7 +5,7 @@ const elemSelector = ".name_group p";
 const elements = document.querySelectorAll(elemSelector);
 let squares = [];
 for (let index = 0; index < elements.length; index++) {
-  console.log(elements[index].getBoundingClientRect());
+  // console.log(elements[index].getBoundingClientRect());
   squares.push({
     dom: elements[index],
     x: elements[index].getBoundingClientRect().x,
@@ -13,7 +13,7 @@ for (let index = 0; index < elements.length; index++) {
     start: elements[index].getBoundingClientRect(),
   });
 }
-console.log(squares);
+//console.log(squares);
 
 //variables
 let selectedElement = false;
@@ -64,6 +64,7 @@ function swapElement(el1, el2) {
 }
 
 document.addEventListener("mousemove", function (e) {
+  console.log(selectedElement);
   if (selectedElement !== false) {
     moveElement(squares[selectedElement], e.clientX, e.clientY, true);
     squares[selectedElement].dom.style.zIndex = "100";
@@ -71,10 +72,10 @@ document.addEventListener("mousemove", function (e) {
     for (let index = 0; index < squares.length; index++) {
       if (index !== selectedElement) {
         if (index === 0) {
-          console.log(
-            squares[selectedElement].dom.getBoundingClientRect(),
-            squares[index].start
-          );
+          // console.log(
+          //   squares[selectedElement].dom.getBoundingClientRect(),
+          //   squares[index].start
+          // );
         }
 
         if (
@@ -113,7 +114,7 @@ document.addEventListener("mouseup", function (e) {
   } else if (selectedElement !== false) {
     squares[selectedElement].dom.style.transform = "translate(0px, 0px)";
   }
-  if (selectedElement) {
+  if (selectedElement !== false) {
     squares[selectedElement].dom.style.zIndex = "0";
     selectedElement = false;
   }
@@ -123,6 +124,8 @@ for (let index = 0; index < squares.length; index++) {
   squares[index].dom.addEventListener("mousedown", function (e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    selectedElement = index;
+    if (!selectedElement) {
+      selectedElement = index;
+    }
   });
 }
