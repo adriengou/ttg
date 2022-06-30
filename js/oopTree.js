@@ -744,10 +744,11 @@ function createSettingsDomManager() {
     };
   }
 
-  function setSettings(name, game, random) {
-    nameDom.value = name;
-    gameDom.value = game;
-    randomDom.checked = random;
+  function setSettings(data, list) {
+    nameDom.value = data.name;
+    gameDom.value = data.game;
+    randomDom.checked = data.random;
+    playersDom.value = list.join("\n");
   }
 
   function getPlayerList() {
@@ -824,9 +825,18 @@ function createStorageManager() {
     return JSON.parse(localStorage.getItem(saveName));
   }
 
+  function loadNames() {
+    let names = [];
+    for (const name in { ...localStorage }) {
+      names.push(name);
+    }
+    return names;
+  }
+
   return {
     save,
     load,
+    loadNames,
   };
 }
 /*
@@ -880,9 +890,56 @@ function createTournamentDomManager(
 
   const treeBack = document.querySelector("#tree > button");
 
+  const loadImgDom = document.querySelector(".storage .load img");
+  const saveImgDom = document.querySelector(".storage .save img");
+  const loadBtn = document.querySelector(".storage .load button");
+  const saveBtn = document.querySelector(".storage .save button");
+  const loadSelect = document.querySelector(".storage .load select");
+  const saveInput = document.querySelector(".storage .save input");
+  const savePopup = document.querySelector(".storage .save .popup");
+  const loadPopup = document.querySelector(".storage .load .popup");
+
   function saveTournament() {
     storageManager.save(settingMan.getSettings(), groupMan.getPlayerList());
   }
+
+  function loadTournament(saveName) {
+    let data = storageManager.load(saveName);
+
+    settingMan.setSettings(data.settings, data.list);
+    groupMan.setPlayerList(data.list);
+  }
+
+  loadImgDom.addEventListener("click", function (e) {
+    loadPopup.classList.toggle("hidden");
+
+    if (!savePopup.classList.contains("hidden")) {
+      savePopup.classList.add("hidden");
+    }
+
+    if (loadPopup.classList.contains("hidden")) {
+      return false;
+    }
+
+    loadSelect.innerHTML = "";
+    for (const name of storageManager.loadNames()) {
+      const optionDom = document.createElement("option");
+      optionDom.value = name;
+      optionDom.textContent = name;
+      loadSelect.appendChild(optionDom);
+    }
+  });
+
+  saveImgDom.addEventListener("click", function (e) {
+    if (!settingMan.validate()) {
+      return false;
+    }
+    saveTournament();
+  });
+
+  loadBtn.addEventListener("click", function (e) {
+    loadTournament(loadSelect.value);
+  });
 
   settingsNext.addEventListener("click", function (e) {
     if (!settingMan.validate()) {
@@ -941,12 +998,14 @@ function testDomManager() {
   let treeMan = createTreeDomManager(tournament);
   let settingMan = createSettingsDomManager();
   let groupMan = createGroupDomManager();
+  let storageManager = createStorageManager();
 
   let tourMan = createTournamentDomManager(
     tournament,
     settingMan,
     groupMan,
-    treeMan
+    treeMan,
+    storageManager
   );
 }
 

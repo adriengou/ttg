@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/tournament.css" />
     <link rel="stylesheet" href="./css/tree.css" />
     <link rel="stylesheet" href="./css/setthingsPopup.css" />
+    <link rel="stylesheet" href="./css/storage.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,6 +37,30 @@
           <span class="font_color_2 close_bracket">]</span>
         </div>
       </nav>
+      <div class="storage">
+        <div class="save">
+          <img src="assets/save.png" alt="" />
+          <div class="popup hidden">
+            <label for="saveNameInput">Name: </label>
+            <input id="saveNameInput" type="text" />
+            <button class="button_style">Save</button>
+          </div>
+        </div>
+        <div class="load">
+          <img src="assets/load.png" alt="" />
+          <div class="popup hidden">
+            <label fo="loadName">Previous tournament settings</label>
+            <select name="" id="loadName">
+              <option value="test">test</option>
+              <option value="test">test</option>
+              <option value="test">test</option>
+              <option value="test">test</option>
+              <option value="test">test</option>
+            </select>
+            <button class="button_style">Load</button>
+          </div>
+        </div>
+      </div>
     </header>
     <main>
       <section class="tournament_section" id="settings">
