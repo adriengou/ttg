@@ -32,7 +32,6 @@
   outline: none;
 }
 .storage .popup button {
-  margin-left: 5px;
   padding: 5px 15px;
 }
 .storage input {
@@ -40,17 +39,23 @@
   font-size: inherit;
 }
 .storage .load .popup {
+  width: 400px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: flex-end;
 }
 .storage .load .popup label {
   width: 100%;
   margin-bottom: 10px;
 }
+.storage .load .popup .input {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
 .storage .load .popup select {
-  width: 80%;
+  margin-right: 15px;
+  flex-grow: 1;
   box-sizing: border-box;
   background-color: transparent;
   padding: 0 1em 0 0;

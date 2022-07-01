@@ -112,17 +112,21 @@ a {
 }
 
 .title {
-  width: 100%;
+  width: 25ch;
 
   font-size: 3rem;
   font-weight: normal;
+  font-family: "Roboto Mono", monospace;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 3%;
+  gap: 20px;
+}
+
+.title p {
 }
 
 .title p::first-letter {
-  color: #64ffda;
+  color: #64fbcf;
 }

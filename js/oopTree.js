@@ -913,10 +913,6 @@ function createTournamentDomManager(
   loadImgDom.addEventListener("click", function (e) {
     loadPopup.classList.toggle("hidden");
 
-    if (!savePopup.classList.contains("hidden")) {
-      savePopup.classList.add("hidden");
-    }
-
     if (loadPopup.classList.contains("hidden")) {
       return false;
     }
@@ -931,6 +927,10 @@ function createTournamentDomManager(
   });
 
   saveImgDom.addEventListener("click", function (e) {
+    if (!loadPopup.classList.contains("hidden")) {
+      loadPopup.classList.add("hidden");
+    }
+
     if (!settingMan.validate()) {
       return false;
     }
