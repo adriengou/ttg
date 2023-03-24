@@ -18,8 +18,8 @@ export default function RootLayout({
           <Navbar
             hrefs={[
               { ref: "/", content: "Home" },
-              { ref: "/", content: "About" },
-              { ref: "/", content: "Contact" },
+              { ref: "/about", content: "About" },
+              { ref: "/contact", content: "Contact" },
             ]}
           />
         </header>
