@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--color-1);
+  border: 1px solid var(--color-2);
+  color: var(--color-2);
+  text-decoration: none;
+  width: fit-content;
+}

@@ -1,0 +1,24 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 180px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.title > span::first-letter {
+  color: var(--color-2);
+}
+
+.tournamentlink {
+  margin-top: 25px;
+}
+
+.tournamentlink > * {
+  padding: 10px;
+}

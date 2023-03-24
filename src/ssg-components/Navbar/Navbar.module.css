@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  transition: all 0.2s ease;
+  justify-content: center;
+  width: 90px;
+
+  text-decoration: none;
+  color: var(--color-3);
+}
+
+.link:hover {
+  gap: 1px;
+}
+
+.bracket {
+  color: var(--color-2);
+}
+
+.content {
+  text-decoration: none;
+  color: var(--color-3);
+}
